@@ -1492,6 +1492,29 @@ div.rankrow .rd-next{margin-top:7px}
 .rd-chev{margin-left:auto;flex:none;width:9px;height:9px;border-right:2px solid var(--gold);border-top:2px solid var(--gold);transform:rotate(45deg);margin-right:3px;animation:rdnudge 2.6s ease-in-out infinite}
 @keyframes rdnudge{0%,70%,100%{translate:0}80%{translate:3px}90%{translate:0}}
 @media (prefers-reduced-motion:reduce){.rd-chev{animation:none}}
+
+/* name / login screen */
+.sheet > *{flex-shrink:0}
+.namepick{overflow-x:hidden!important}
+.namepick .np-in{width:100%;max-width:400px;min-width:0;box-sizing:border-box}
+.np-in > *{max-width:100%;min-width:0;box-sizing:border-box}
+.np-tag,.np-pw{display:flex;align-items:center;gap:8px;width:100%;min-width:0}
+.np-tag input,.np-pw input{flex:1 1 0;width:0;min-width:0}
+.np-pw input{font-family:var(--body,inherit)!important;font-size:18px!important;letter-spacing:.04em}
+.np-tag .btn,.np-pw .btn{flex:none;min-height:46px;padding-inline:12px}
+.np-hint{display:block;text-align:center;font-size:12px;color:rgba(255,236,210,.62);margin-top:-2px}
+.np-link{background:none;border:0;color:rgba(255,236,210,.8);font:inherit;font-size:14px;padding:10px;cursor:pointer;align-self:center}
+.np-link b{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+.setrow.acct{align-items:center}
+.setrow.acct .btn{flex:none}
+/* same dark plank wall as the Deck tab on every full page */
+.ranks{background:linear-gradient(rgba(6,3,1,.74),rgba(6,3,1,.74)),var(--bg-wood) center/cover,var(--bg)!important;background-origin:border-box!important}
+/* trophy road speed: skip drawing rows that are off screen, no costly filters */
+.roadpage .rd-n,.roadpage .rd-gate{content-visibility:auto;contain-intrinsic-size:auto 120px}
+.rd-n.locked .rd-icons{filter:none!important;opacity:.62}
+.rd-gate:not(.past) .rd-gplate .badge{filter:none!important;opacity:.5}
+.rd-n.past .rd-sign .pic{filter:none!important;opacity:.55}
+.roadpage{animation:none!important}
 </style>
 
 </head>
@@ -1717,7 +1740,7 @@ const fresh=()=>({gold:300,trophies:0,wins:0,losses:0,
 let S=null;
 const UI={tab:'home',swap:null};
 function load(){try{const r=localStorage.getItem(KEY);if(r){const d=JSON.parse(r);if(d&&d.cards&&d.deck)return d}}catch(e){}return fresh()}
-function save(){try{if(S&&S.decks)S.decks[S.deckI||0]=S.deck.slice();localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function save(){try{if(S&&S.decks)S.decks[S.deckI||0]=S.deck.slice();localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}try{pushSave()}catch(e){}}
 
 const rand=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
 const pick=a=>a[Math.floor(Math.random()*a.length)];
@@ -2074,11 +2097,93 @@ function nameScreen(first){
       <label class="np-lbl" for="ptag">Tag</label>
       <div class="np-tag"><span>#</span><input id="ptag" maxlength="4" autocomplete="off" spellcheck="false" value="${tag}"><button class="btn ghost sm" data-a="rollTag" type="button">Random</button></div>
       <div class="np-prev">You'll be <b id="npprev">${esc(S.name||'…')}#${tag}</b></div>
+      ${first?`<label class="np-lbl" for="ppw">Password</label>
+      <div class="np-pw"><input id="ppw" type="password" maxlength="40" autocomplete="new-password" placeholder="At least 6 characters"><button class="btn ghost sm" data-a="showPw" data-v="ppw" type="button">Show</button></div>
+      <small class="np-hint">You log in with your name and this password on a new phone.</small>`:''}
       <div class="np-err" id="nperr"></div>
       <button class="btn wide" data-a="saveName" data-v="${first?1:''}">${first?'Saddle up':'Save'}</button>
-      ${first?'':'<button class="btn ghost wide" data-a="profile">Cancel</button>'}
+      ${first?'<button class="np-link" data-a="loginScreen">Already got an account? <b>Log in</b></button>':'<button class="btn ghost wide" data-a="profile">Cancel</button>'}
     </div></div>`;
   setTimeout(()=>{const i=document.getElementById('pname');if(i&&first)i.focus()},50);
+}
+function loginScreen(fromSettings){
+  layer().innerHTML=`<div class="ranks namepick" role="dialog" aria-modal="true" aria-label="Log in">
+    <div class="np-in gutter">
+      <div class="np-ava">${bust(S.char||'dusty',96)}</div>
+      <h2>Welcome back</h2>
+      <p>Log in with the name and password you made.${S.name&&!S.acct?' The progress on this phone is replaced by your account.':''}</p>
+      <label class="np-lbl" for="lname">Name</label>
+      <input id="lname" maxlength="14" autocomplete="username" spellcheck="false" autocapitalize="off" placeholder="Your name">
+      <label class="np-lbl" for="lpw">Password</label>
+      <div class="np-pw"><input id="lpw" type="password" maxlength="40" autocomplete="current-password" placeholder="Password"><button class="btn ghost sm" data-a="showPw" data-v="lpw" type="button">Show</button></div>
+      <div class="np-err" id="lerr"></div>
+      <button class="btn wide" data-a="doLogin">Log in</button>
+      ${fromSettings?'<button class="btn ghost wide" data-a="close">Cancel</button>':'<button class="np-link" data-a="newPlayer">New here? <b>Make a gunslinger</b></button>'}
+    </div></div>`;
+  setTimeout(()=>{const i=document.getElementById('lname');if(i)i.focus()},50);
+}
+function netReady(ms){return new Promise(r=>{const t0=Date.now();(function w(){if(NET.ok||NET.err||Date.now()-t0>ms)return r(NET.ok);setTimeout(w,150)})()})}
+async function netSetAccount(name,pw){
+  try{const {data,error}=await NET.sb.rpc('sg_set_account',{p_user:name,p_pw:pw});if(error)return 'Could not save your password. Try again.';return data||''}catch(e){return 'Could not save your password. Try again.'}
+}
+let pushT=null;
+function pushSave(now){
+  if(!S||!S.acct||!NET.ok)return;clearTimeout(pushT);
+  const go=()=>{try{NET.sb.rpc('sg_push_save',{p_save:S}).then(()=>{},()=>{})}catch(e){}};
+  if(now)go();else pushT=setTimeout(go,8000);
+}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)pushSave(true)});
+async function doLogin(){
+  const n=((document.getElementById('lname')||{}).value||'').trim(),pw=(document.getElementById('lpw')||{}).value||'',e=document.getElementById('lerr'),b=document.querySelector('[data-a="doLogin"]');
+  if(!n||!pw){if(e)e.textContent='Type your name and password.';sfx('early');return}
+  if(b){b.disabled=true;b.textContent='Logging in…'}
+  const fail=m=>{if(b){b.disabled=false;b.textContent='Log in'}if(e)e.textContent=m;sfx('early')};
+  if(!await netReady(8000))return fail("Can't reach the server. Check your internet and try again.");
+  try{
+    if(S.acct){pushSave(true);await NET.sb.auth.signOut();const r=await NET.sb.auth.signInAnonymously();if(r.error)throw r.error;NET.me=r.data.session.user.id;NET.synced=false}
+    const {data,error}=await NET.sb.rpc('sg_login',{p_user:n,p_pw:pw});
+    if(error)return fail('Could not log in. Try again.');
+    if(!data||data.err)return fail(data&&data.err||'Wrong name or password.');
+    const sv=data.save;
+    S=(sv&&sv.cards&&sv.deck)?sv:fresh();
+    S.name=data.name;S.tag=data.tag;S.acct=data.username;S.onboarded=true;if(!sv&&data.char)S.char=data.char;if(!sv)S.trophies=Math.max(S.trophies,data.trophies||0);
+    delete S.needPw;upgradeState();save();NET.synced=true;NET.sig=null;
+    closeLayer();UI.tab='home';render();music();sfx('bling');toast(`Welcome back, ${S.name}!`);
+    netPoll();pushSave(true);
+  }catch(x){fail('Could not log in. Try again.')}
+}
+function pwSheet(){
+  sheet(`<div style="display:flex;flex-direction:column;gap:10px">
+    <h2 style="margin:0;text-align:center;font-size:24px">Make a password</h2>
+    <p class="muted" style="margin:0;text-align:center">Keep your gunslinger safe. With a password you can log in as <b style="color:var(--fg)">${esc(S.name)}</b> on any phone and keep your cards, gold and friends.</p>
+    <div class="np-pw"><input id="spw" type="password" maxlength="40" autocomplete="new-password" placeholder="At least 6 characters"><button class="btn ghost sm" data-a="showPw" data-v="spw" type="button">Show</button></div>
+    <div class="np-err" id="spwerr"></div>
+    <div class="row2"><button class="btn ghost" data-a="close">Not now</button><button class="btn" data-a="savePw">Save</button></div></div>`);
+}
+async function savePw(){
+  const pw=(document.getElementById('spw')||{}).value||'',e=document.getElementById('spwerr');
+  if(pw.length<6){if(e)e.textContent='Your password needs at least 6 characters.';sfx('early');return}
+  if(!await netReady(6000)){if(e)e.textContent="Can't reach the server. Try again later.";sfx('early');return}
+  if(!NET.synced)await netSyncProfile();
+  const er=await netSetAccount(S.name,pw);
+  if(er){if(e)e.innerHTML=esc(er)+(/name/.test(er)?' <a href="#" data-a="rename" style="color:var(--gold)">Change name</a>':'');sfx('early');return}
+  S.acct=S.name;delete S.needPw;save();pushSave(true);closeLayer();sfx('bling');toast('Password saved');
+}
+/* is this phone still the logged-in one? */
+async function netWho(){
+  if(!NET.ok||!S.acct)return true;
+  try{const {data}=await NET.sb.rpc('sg_whoami');if(data&&!data.account&&!data.profile){kicked();return false}}catch(e){}
+  return true;
+}
+function kicked(){
+  const nm=S.acct;S=fresh();save();NET.synced=false;closeLayer();render();
+  loginScreen();const e=document.getElementById('lerr');if(e)e.textContent=`${nm} logged in on another phone. Log in again to play here.`;
+  const i=document.getElementById('lname');if(i)i.value=nm||'';
+}
+function maybeAskPw(){
+  if(!NET.ok||!S.name||S.acct||D||CH||TUT||layer().innerHTML.trim())return;
+  if(S.pwAskAt&&Date.now()-S.pwAskAt<86400000)return;
+  S.pwAskAt=Date.now();save();pwSheet();
 }
 function nameCheck(){
   const n=(document.getElementById('pname')||{}).value||'', t=((document.getElementById('ptag')||{}).value||'').toUpperCase();
@@ -2377,7 +2482,7 @@ function netInit(){
       let {data:{session}}=await NET.sb.auth.getSession();
       if(!session){const r=await NET.sb.auth.signInAnonymously();if(r.error)throw r.error;session=r.data.session}
       NET.me=session.user.id;NET.ok=true;
-      await netSyncProfile();netPoll();
+      await netSyncProfile();netPoll();setTimeout(maybeAskPw,4000);pushSave(true);
       setInterval(netPoll,6000);setInterval(netBeat,30000);
     }catch(e){NET.err=String(e&&e.message||e);console.warn('Sixgun online is off:',NET.err)}
   };
@@ -2394,6 +2499,7 @@ async function netClaim(name,tag){
 }
 async function netSyncProfile(){
   if(!NET.ok||!S.name)return;
+  if(S.acct&&!await netWho())return;
   for(let i=0;i<5;i++){
     const err=await netClaim(S.name,S.tag);
     if(!err)return;
@@ -2401,7 +2507,7 @@ async function netSyncProfile(){
   }
   toast(`Your tag is now #${S.tag}`);render();
 }
-async function netBeat(){if(!NET.ok||!S.name)return;if(!NET.synced)return netSyncProfile();await NET.sb.from('profiles').update({char:S.char,trophies:S.trophies,lvl:S.lvl||1,last_seen:new Date().toISOString()}).eq('id',NET.me)}
+async function netBeat(){if(!NET.ok||!S.name)return;if(S.acct&&!await netWho())return;maybeAskPw();if(!NET.synced)return netSyncProfile();await NET.sb.from('profiles').update({char:S.char,trophies:S.trophies,lvl:S.lvl||1,last_seen:new Date().toISOString()}).eq('id',NET.me)}
 async function netPoll(){
   if(!NET.ok||!S.name||document.hidden)return;
   try{
@@ -3507,10 +3613,25 @@ const A={
     if(D&&!D.over&&Math.random()<.5)setTimeout(()=>{if(D&&!D.over)showEmote('op',EMOTES[pick([...EMO_DEFAULT,'thumbs','grin','angry','cry','shock'])])},rand(900,1800))},
   profile:()=>profileScreen(),
   rename:()=>{UI.ptag=null;nameScreen(false)},
+  showPw:v=>{const i=document.getElementById(v);if(!i)return;const s=i.type==='password';i.type=s?'text':'password';const b=document.querySelector(`[data-a="showPw"][data-v="${v}"]`);if(b)b.textContent=s?'Hide':'Show'},
+  loginScreen:()=>loginScreen(),
+  newPlayer:()=>{UI.ptag=null;nameScreen(true)},
+  doLogin:()=>doLogin(),
+  pwSheet:()=>pwSheet(),
+  savePw:()=>savePw(),
+  switchAcct:()=>loginScreen(true),
   rollTag:()=>{const t=randTag();UI.ptag=t;const i=document.getElementById('ptag');if(i){i.value=t;i.dispatchEvent(new Event('input',{bubbles:true}))}},
   saveName:async v=>{const r=nameCheck();const e=document.getElementById('nperr');if(r.err){if(e)e.textContent=r.err;sfx('early');return}
-    if(NET.ok){const b=document.querySelector('[data-a="saveName"]');if(b)b.disabled=true;const er=await netClaim(r.name,r.tag);if(b)b.disabled=false;if(er){if(e)e.textContent=er;sfx('early');return}}
-    S.name=r.name;S.tag=r.tag;UI.ptag=null;save();render();
+    const pwEl=document.getElementById('ppw'),pw=pwEl?pwEl.value:'';
+    if(v&&pw.length<6){if(e)e.textContent='Your password needs at least 6 characters.';sfx('early');return}
+    const b=document.querySelector('[data-a="saveName"]');if(b)b.disabled=true;
+    if(v)await netReady(7000);
+    if(NET.ok){const er=await netClaim(r.name,r.tag);if(er){if(b)b.disabled=false;if(e)e.textContent=er;sfx('early');return}
+      if(v){const ae=await netSetAccount(r.name,pw);if(ae){if(b)b.disabled=false;if(e)e.textContent=ae;sfx('early');return}S.acct=r.name}
+      else if(S.acct){const {data:re}=await NET.sb.rpc('sg_rename',{p_user:r.name});if(re){if(b)b.disabled=false;if(e)e.textContent=re;sfx('early');return}S.acct=r.name}}
+    else if(v){S.needPw=true}
+    if(b)b.disabled=false;
+    S.name=r.name;S.tag=r.tag;UI.ptag=null;save();render();if(v&&!NET.ok)setTimeout(()=>toast('Offline: make your password later in Settings'),2600);
     if(v){closeLayer();toast(`Welcome, ${S.name}!`);if(!S.onboarded)setTimeout(()=>startTutorial(true),500)}else{profileScreen();toast('Name saved')}},
   achievements:()=>achievementsScreen(),
   claimBounty:v=>{ensureBounties();const x=S.bounties[+v];if(!x||x.c)return;const b=BOUNTY_POOL[x.i];if(x.p<b.n)return;x.c=true;S.gold+=b.g;S.st.bounties++;save();sfx('coin');vibe(20);toast(`Bounty done! +${b.g} gold`);checkAch();const sc=document.getElementById('screen'),y=sc.scrollTop;render();sc.scrollTop=y},
@@ -3626,6 +3747,7 @@ function settingsSheet(){
       <label class="setrow vol ${S.muted?'off':''}"><span><b>Effects volume</b><small id="sfxvoll">${Math.round(sfxVol()*100)}%</small></span><input type="range" id="sfxvol" class="vslider" min="0" max="100" step="5" value="${Math.round(sfxVol()*100)}" style="--p:${Math.round(sfxVol()*100)}%" aria-label="Sound effects volume" ${S.muted?'disabled':''}></label>
       ${tog('vibe','Vibration','A small buzz on hits and wins',!S.vibeOff)}
     </div>
+    <div class="setrow acct"><span><b>Account</b><small>${S.acct?`Logged in as ${esc(S.acct)}`:'No password yet. Make one to log in on other phones.'}</small></span>${S.acct?'<button class="btn ghost sm" data-a="switchAcct">Switch</button>':'<button class="btn sm" data-a="pwSheet">Make password</button>'}</div>
     <button class="btn wide" data-a="tutorial">${icon('help',20,2.4)} Tutorial</button>
     <p class="muted" style="margin:-6px 0 0;text-align:center;font-size:12.5px">Play a guided practice duel. Nothing to lose.</p>
     <div class="row2"><button class="btn ghost" data-a="rules">Duel rules</button><button class="btn ghost" data-a="ranks">All ranks</button></div>
