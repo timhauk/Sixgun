@@ -1515,6 +1515,93 @@ div.rankrow .rd-next{margin-top:7px}
 .rd-gate:not(.past) .rd-gplate .badge{filter:none!important;opacity:.5}
 .rd-n.past .rd-sign .pic{filter:none!important;opacity:.55}
 .roadpage{animation:none!important}
+
+/* first-time story duel: strip the busy bits */
+.duel.story .dtop .iconbtn,.duel.story .pips,.duel.story .opbar .ammo,.duel.story .chalchip,.duel.story .selinfo,.duel.story .frow .hold,.duel.story #timer{visibility:hidden}
+.duel.story:not(.sammo) .mebar .ammo{visibility:hidden}
+.duel.story .dtop .dmid span{visibility:hidden}
+.duel.story .frow .fire{flex:1}
+.stable{display:flex;flex-direction:column;align-items:center;gap:8px;min-height:64px}
+.tell{display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:rgba(12,7,4,.82);border:1px solid rgba(240,196,110,.5);color:#ffe7b5;font-size:14px;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,.5);animation:tellin .5s cubic-bezier(.2,1.3,.4,1)}
+.tell span{font-size:20px;line-height:1}
+@keyframes tellin{from{transform:translateY(-8px) scale(.85);opacity:0}}
+.srules{display:flex;flex-direction:column;align-items:center;gap:4px}
+.srule{padding:4px 12px;border-radius:4px;background:rgba(12,7,4,.78);border:1px solid rgba(255,220,170,.2);font-size:13.5px;color:#f3e3c4}
+.srule span{opacity:.75;margin:0 3px}
+.srule.new{animation:rulein .6s cubic-bezier(.2,1.4,.4,1);border-color:var(--gold);box-shadow:0 0 16px rgba(246,187,68,.45)}
+@keyframes rulein{0%{transform:scale(.4);opacity:0}100%{transform:scale(1)}}
+.hcard.nope{animation:nope .4s}
+@keyframes nope{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.btn.fire.tutglow:not([disabled]){box-shadow:0 0 0 2px #ffd77a,0 0 22px rgba(255,200,90,.7)}
+.firstbox{display:flex;flex-direction:column;align-items:center;gap:6px;margin:4px 0 6px}
+.firstbox .rwbox{width:150px;height:130px;display:block;animation:fbob 2.2s ease-in-out infinite}
+.firstbox .rwbox .cimg{width:100%;height:100%}
+.firstbox b{font-family:var(--display);font-weight:400;font-size:20px;color:#ffe2aa}
+@keyframes fbob{50%{transform:translateY(-6px) rotate(-2deg)}}
+.sp-login{position:relative;z-index:2;margin-top:14px;font-size:13.5px;color:rgba(255,236,210,.75);padding:8px 12px;cursor:pointer}
+.sp-login b{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+
+.tut.free .tut-hole,.tut.waiting .tut-hole{display:none!important}
+.duel.story .table{position:relative}
+.duel.story .tell{position:absolute;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100% - 8px);top:6px;z-index:3;white-space:nowrap}
+.tell span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--tc,var(--gold));color:#1a0e06}
+
+/* tournaments */
+.tabs{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+.tcup-ic{display:inline-grid;place-items:center;width:28px;height:26px;color:#cdb48c}
+.tab[aria-current] .tcup-ic{color:var(--gold)}
+.app.tab-cup{background:linear-gradient(rgba(6,3,1,.74),rgba(6,3,1,.74)),var(--bg-wood) center/cover,var(--bg)!important}
+.cuphead{display:flex;align-items:center;justify-content:space-between}
+.cuphead h1{font-size:28px;margin:0;color:#fff2d6}
+.tempty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:40px 10px;color:rgba(255,236,210,.85)}
+.tempty.sm{padding:18px 10px}
+.tcard{display:flex;flex-direction:column;gap:12px;padding:14px;border-radius:6px;background:linear-gradient(180deg,rgba(40,25,14,.7),rgba(14,8,4,.85));border:1px solid rgba(214,170,100,.35);box-shadow:0 10px 24px rgba(0,0,0,.4)}
+.thead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.thead h2{margin:2px 0 0;font-size:24px;color:#fff2d6}
+.tpot{text-align:right;flex:none}
+.tpot small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,236,210,.6)}
+.tpot b{font-family:var(--display);font-weight:400;font-size:24px;color:#ffe2aa;display:inline-flex;align-items:center;gap:5px}
+.tprizes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tp{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:5px;background:rgba(0,0,0,.28);border:1px solid rgba(255,220,170,.14);text-align:center}
+.tp1{border-color:rgba(246,187,68,.7);box-shadow:0 0 14px rgba(246,187,68,.25)}
+.tpl{font-family:var(--display);font-size:16px;color:#ffe2aa}
+.tpbox{width:62px;height:54px;display:block}.tpbox .cimg{width:100%;height:100%}
+.tp b{display:inline-flex;align-items:center;gap:4px;font-size:15px;color:#fff2d6}
+.tp small{font-size:10.5px;color:rgba(255,236,210,.6);line-height:1.25}
+.tmeta,.tyou{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:rgba(255,236,210,.75)}
+.tyou{padding:8px 10px;border-radius:5px;background:rgba(246,187,68,.1);border:1px solid rgba(246,187,68,.35);color:#fff2d6}
+.tnote{display:block;text-align:center;margin-top:-6px;font-size:12px;color:rgba(255,236,210,.65)}
+.thelp{margin:0;font-size:12.5px;line-height:1.45;color:rgba(255,236,210,.68)}
+.tplay{gap:8px}
+.tboard{display:flex;flex-direction:column;gap:5px}
+.trow{display:grid;grid-template-columns:26px 36px minmax(0,1fr) auto;align-items:center;gap:8px;padding:5px 8px;border-radius:4px;background:rgba(0,0,0,.25)}
+.trow.me{background:rgba(246,187,68,.14);box-shadow:inset 0 0 0 1px rgba(246,187,68,.5)}
+.trk{font-family:var(--display);font-size:16px;text-align:center;color:rgba(255,236,210,.75)}
+.trow.top1 .trk{color:#ffd76a}.trow.top2 .trk{color:#d9e1ea}.trow.top3 .trk{color:#e0a46a}
+.tava{width:34px;height:34px;border-radius:4px;overflow:hidden;display:block}
+.tnm{min-width:0}.tnm b{display:block;font-size:14px;color:#fff2d6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tnm small{font-size:11px;color:rgba(255,236,210,.55)}
+.ondot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#5fd36e;margin-right:3px;vertical-align:1px}
+.tpt{text-align:right}.tpt b{display:block;font-family:var(--display);font-weight:400;font-size:18px;color:#ffe2aa}.tpt small{font-size:10.5px;color:rgba(255,236,210,.55)}
+.tpast{opacity:.9}
+.tres{display:flex;align-items:center;gap:6px;font-size:15px;color:#fff2d6}
+.tclaim{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.tclaim h2{margin:0}
+.tplace{font-family:var(--display);font-size:46px;line-height:1;color:#ffd76a;text-shadow:0 3px 0 rgba(0,0,0,.6),0 0 22px rgba(255,200,90,.5)}
+.tplace.p2{color:#d9e1ea}.tplace.p3{color:#e0a46a}
+.tgot{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-size:22px}
+.tgot span{display:inline-flex;align-items:center;gap:6px}
+.tgbox{width:96px;height:84px;display:block}.tgbox .cimg{width:100%;height:100%}
+.tform{display:flex;flex-direction:column;gap:9px}
+.tform label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,236,210,.7);min-width:0}
+.tform label small{font-weight:400;letter-spacing:0;text-transform:none;font-size:11px;color:rgba(255,236,210,.5)}
+.tform input,.tform select{height:40px;border-radius:4px;border:1px solid rgba(255,220,170,.25);background:rgba(10,6,3,.78);color:#fff2d6;font:inherit;font-size:15px;padding:0 10px;width:100%;min-width:0;box-sizing:border-box;text-transform:none;letter-spacing:0;font-weight:400}
+.tf2,.tf3{display:grid;gap:8px}.tf2{grid-template-columns:1fr 1fr}.tf3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tadm{display:flex;align-items:center;gap:8px;padding:8px;border-radius:4px;background:rgba(0,0,0,.25)}
+.tadm span{flex:1;min-width:0}.tadm small{display:block;font-size:11.5px;color:rgba(255,236,210,.6)}
+/* Royal Strongbox: gold box in royal purple until its own picture arrives */
+.ch-royal.cimg > i{filter:hue-rotate(245deg) saturate(1.35) brightness(1.02)}
+.ch-royal.cimg{filter:drop-shadow(0 0 14px rgba(200,90,255,.6))}
 </style>
 
 </head>
@@ -1654,7 +1741,8 @@ const CHESTS={
   wood:{tier:'Common',name:'Wooden Strongbox',g:[15,35],stacks:2,c:[2,5],newP:.03,price:0},
   silver:{tier:'Rare',name:'Iron Strongbox',g:[40,80],stacks:3,c:[4,9],newP:.12,price:400},
   gold:{tier:'Epic',name:'Gold Strongbox',g:[120,220],stacks:4,c:[9,18],newP:.35,price:1500},
-  noman:{tier:'Legendary',name:"No Man's Strongbox",g:[500,800],stacks:5,c:[24,40],newP:1,best:true,price:0}
+  royal:{tier:'Mythic',name:'Royal Strongbox',g:[350,550],stacks:5,c:[18,30],newP:.7,price:0},
+  noman:{tier:'Legendary',name:"No Man's Strongbox",g:[1000,1500],stacks:6,c:[40,65],newP:1,best:true,price:0}
 };
 const OUTLAWS=['Rattlesnake Ray','Two-Bit Tess','Mad Dog Morgan','Lucky Lou','Cactus Kate','Smokey Joe','One-Eyed Pete','Dutch Malone'];
 const FREE_MS=60*60*1000;
@@ -1729,7 +1817,7 @@ const CHEST_COL={
   silver:{body:['#5f6f8d','#353f55'],lid:['#93a3c2','#5d6c8a'],trim:['#f4f7fb','#a9b4c6']},
   gold:{body:['#9c2635','#5a1220'],lid:['#c5394a','#80192a'],trim:['#ffe28a','#d0911f']}
 };
-function chestSVG(t){return `<span class="cimg ch-${t}" role="img" aria-label="${CHESTS[t].name}"><i class="cc"></i><i class="co"></i></span>`}
+function chestSVG(t){return `<span class="cimg ch-${t==='royal'?'gold ch-royal':t}" role="img" aria-label="${CHESTS[t].name}"><i class="cc"></i><i class="co"></i></span>`}
 
 /* ---------- state ---------- */
 const KEY='sixgun-showdown-v1';
@@ -1796,8 +1884,8 @@ function renderTop(){
     <button class="iconbtn gearbtn" data-a="settings" aria-label="Settings">${icon('gear',21,2)}</button>`;
 }
 function renderTabs(){
-  const T=[['home','duel','Duel'],['deck','cards','Deck'],['posse','hat','Posse'],['shop','chest','Chests']];
-  document.getElementById('tabs').innerHTML=T.map(([k,ic,l])=>`<button class="tab" data-a="tab" data-v="${k}" ${UI.tab===k?'aria-current="page"':''}><span class="ti">${mi('t_'+ic,28,26)}</span>${l}</button>`).join('');
+  const T=[['home','duel','Duel'],['deck','cards','Deck'],['posse','hat','Posse'],['shop','chest','Chests'],['cup','cup','Tourney']];
+  document.getElementById('tabs').innerHTML=T.map(([k,ic,l])=>`<button class="tab" data-a="tab" data-v="${k}" ${UI.tab===k?'aria-current="page"':''}><span class="ti">${ic==='cup'?`<span class="tcup-ic" aria-hidden="true">${icon('trophy',24,2)}</span>`:mi('t_'+ic,28,26)}</span>${l}</button>`).join('');
 }
 
 /* ---------- screens ---------- */
@@ -1916,7 +2004,7 @@ function posseScreen(){
 /* the carousel: chests you won first, then the free one, then the ones for sale */
 function boxList(){
   const L=[];S.slots.forEach((x,i)=>{if(x)L.push({kind:'slot',t:x.t,i})});
-  L.push({kind:'free',t:'wood'},{kind:'buy',t:'silver'},{kind:'buy',t:'gold'},{kind:'find',t:'noman'});return L;
+  L.push({kind:'free',t:'wood'},{kind:'buy',t:'silver'},{kind:'buy',t:'gold'},{kind:'find',t:'royal'},{kind:'find',t:'noman'});return L;
 }
 const fmtLeft=ms=>{const m=Math.floor(ms/60000),s=Math.ceil((ms%60000)/1000);return `${m}:${String(s===60?59:s).padStart(2,'0')}`};
 function boxLines(t){const C=CHESTS[t];return [
@@ -1936,7 +2024,7 @@ function shopScreen(){
   if(b.kind==='slot'){btn=`<button class="btn wide bbuy" data-a="openSlot" data-v="${b.i}">Open</button>`;note='Won in a duel. Free to open.'}
   else if(b.kind==='free'){const left=Math.max(0,S.freeAt-Date.now());
     btn=`<button class="btn wide bbuy" data-a="freeChest" id="freeBtn" ${left?'disabled':''}>${left?`Free again in ${fmtLeft(left)}`:'Open free'}</button>`;note='A free one every hour.'}
-  else if(b.kind==='find'){btn=`<button class="btn wide bbuy" disabled>Found only in duels</button>`;note='About 1 in 150 duel wins. It can\'t be bought.'}
+  else if(b.kind==='find'){btn=`<button class="btn wide bbuy" disabled>${b.t==='royal'?'Won in tournaments':'Found only in duels'}</button>`;note=b.t==='royal'?'Win a tournament to get one. Very rarely found in duels (about 1 in 125 wins).':'About 1 in 500 duel wins. It can\'t be bought.'}
   else{const can=S.gold>=C.price;
     btn=`<button class="btn wide bbuy" data-a="buyChest" data-v="${b.t}" ${can?'':'disabled'}>Buy · ${pic('coin',21)} ${C.price}</button>`;note=can?'':`You need ${C.price-S.gold} more gold.`}
   const ui=`
@@ -1988,11 +2076,12 @@ window.addEventListener('resize',()=>requestAnimationFrame(fitHome));
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>fitHome());
 function render(){
   upgradeState();
-  {const app=document.getElementById('app');app.classList.remove('tab-home','tab-deck','tab-posse','tab-shop');app.classList.add('tab-'+UI.tab)}
+  {const app=document.getElementById('app');app.classList.remove('tab-home','tab-deck','tab-posse','tab-shop','tab-cup');app.classList.add('tab-'+UI.tab)}
   renderTop();renderTabs();
   const sc=document.getElementById('screen');
-  sc.innerHTML=({home:homeScreen,deck:deckScreen,posse:posseScreen,shop:shopScreen})[UI.tab]();
+  sc.innerHTML=({home:homeScreen,deck:deckScreen,posse:posseScreen,shop:shopScreen,cup:cupScreen})[UI.tab]();
   if(UI.tab==='home')fitHome();
+  if(UI.tab!=='home'&&!CH)tipsFor(UI.tab);
   clearInterval(shopTimer);
   if(UI.tab==='shop'&&!CH&&S.freeAt>Date.now())shopTimer=setInterval(()=>{
     const el=document.getElementById('freeBtn');
@@ -2074,6 +2163,7 @@ const randTag=()=>Array.from({length:4},()=>TAGCH[Math.floor(Math.random()*TAGCH
 const curMap=()=>{const mx=rankOf(S.maxTro||S.trophies);return S.map!=null&&S.map<=mx?S.map:rankOf(S.trophies)};
 const pname=()=>S.name||CHARS[S.char].name;
 function upgradeState(){
+  if(S&&!S.tips)S.tips=S.onboarded?{duel:1,deck:1,posse:1,shop:1}:{};
   S.st=Object.assign({played:0,dmg:0,heal:0,blocks:0,qd:0,boxes:0,bounties:0,streak:0,best:0,cp:{},close:0,flawless:0,pete:0,ups:0},S.st||{});
   if(!S.decks){S.decks=[S.deck.slice(),S.deck.slice(),S.deck.slice()];S.deckI=0}
   S.ach=S.ach||{};
@@ -2483,7 +2573,7 @@ function netInit(){
       if(!session){const r=await NET.sb.auth.signInAnonymously();if(r.error)throw r.error;session=r.data.session}
       NET.me=session.user.id;NET.ok=true;
       await netSyncProfile();netPoll();setTimeout(maybeAskPw,4000);pushSave(true);
-      setInterval(netPoll,6000);setInterval(netBeat,30000);
+      setInterval(netPoll,6000);setInterval(netBeat,30000);setTimeout(tClaim,5000);setInterval(()=>{if(UI.tab==='cup'&&!D&&!CH&&!TR.seek&&!layer().innerHTML.trim())tRefresh()},20000);
     }catch(e){NET.err=String(e&&e.message||e);console.warn('Sixgun online is off:',NET.err)}
   };
   s.onerror=()=>{NET.err='Could not load the online code'};
@@ -2507,7 +2597,7 @@ async function netSyncProfile(){
   }
   toast(`Your tag is now #${S.tag}`);render();
 }
-async function netBeat(){if(!NET.ok||!S.name)return;if(S.acct&&!await netWho())return;maybeAskPw();if(!NET.synced)return netSyncProfile();await NET.sb.from('profiles').update({char:S.char,trophies:S.trophies,lvl:S.lvl||1,last_seen:new Date().toISOString()}).eq('id',NET.me)}
+async function netBeat(){if(!NET.ok||!S.name)return;if(S.acct&&!await netWho())return;maybeAskPw();tClaim();if(!NET.synced)return netSyncProfile();await NET.sb.from('profiles').update({char:S.char,trophies:S.trophies,lvl:S.lvl||1,last_seen:new Date().toISOString()}).eq('id',NET.me)}
 async function netPoll(){
   if(!NET.ok||!S.name||document.hidden)return;
   try{
@@ -2612,16 +2702,16 @@ async function answerChallenge(yes){
 /* ---------- live duel between two players ---------- */
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function netSend(O,m){try{O.ch.send({type:'broadcast',event:'m',payload:m})}catch(e){}}
-function startOnline(cid,host,fr){
+function startOnline(cid,host,fr,tour){
   clearMM();
   const mine={name:pname(),char:S.char,deck:S.deck.slice(),lv:Object.fromEntries(S.deck.map(id=>[id,(S.cards[id]||{l:1}).l]))};
-  const O={cid,host,fr,mine,their:null,seed:host?Math.floor(Math.random()*1e9):null,started:false};
+  const O={cid,host,fr,tour:tour||null,mine,their:null,seed:host?Math.floor(Math.random()*1e9):null,started:false};
   O.ch=NET.sb.channel('duel-'+cid,{config:{broadcast:{self:false}}});
   layer().innerHTML=`<div class="mm" role="dialog" aria-modal="true" aria-label="Connecting">${CYL}<h2>Connecting</h2><div class="st">Getting ready to duel ${esc(fr.name)}…</div><button class="btn ghost sm" data-a="cancelOnline">Cancel</button></div>`;
   NET.cur=O;
   O.ch.on('broadcast',{event:'m'},({payload:m})=>onlineMsg(O,m));
   O.ch.subscribe(st=>{if(st==='SUBSCRIBED'&&!O.hello){O.hello=setInterval(()=>netSend(O,{t:'hello',p:O.mine,seed:O.seed}),700);netSend(O,{t:'hello',p:O.mine,seed:O.seed})}});
-  O.to=setTimeout(()=>{if(!O.started){leaveOnline(O);closeLayer();toast(`Could not connect to ${fr.name}`);friendsScreen()}},20000);
+  O.to=setTimeout(()=>{if(!O.started){leaveOnline(O);closeLayer();if(O.tour){toast(`Could not reach ${fr.name}. You get their ghost instead.`);tGhost(O.tour.t);return}toast(`Could not connect to ${fr.name}`);friendsScreen()}},O.tour?9000:20000);
 }
 function leaveOnline(O,quiet){
   if(!O||O.gone)return;O.gone=true;clearInterval(O.hello);clearTimeout(O.to);clearTimeout(O.wait);
@@ -2645,12 +2735,12 @@ function onlineMsg(O,m){
 function beginOnlineDuel(O){
   const t=O.their;
   D={turn:1,sel:null,busy:false,lines:[],reveal:null,over:null,cd:null,slam:false,tier:0,arena:0,hist:[],qd:[],
-    friendly:true,pvp:true,online:O,
+    friendly:true,pvp:true,online:O,tourney:O.tour?{tid:O.tour.tid,title:O.tour.t.title,real:true}:null,
     me:makeSide(true,'You',O.mine.char,O.mine.deck,O.mine.lv),
-    op:makeSide(false,t.name,CHARS[t.char]?t.char:'dusty',t.deck,t.lv)};
+    op:makeSide(false,O.tour?`${t.name} (real player)`:t.name,CHARS[t.char]?t.char:'dusty',t.deck,t.lv)};
   const first=t.name.split(' ')[0];Object.assign(D.op,{who:first,obj:first,poss:first+"'s"});
   D.cnt={shoot:0,defend:0,trick:0,extra:0,hold:0,heal:0,blocks:0,combos:0};D.lowest=1;D.opBack='classic';
-  D.lines=[`<span class="hint">Live duel with ${esc(t.name)}. Pick a card.</span>`];
+  D.lines=[`<span class="hint">${O.tour?'Tournament duel against the real':'Live duel with'} ${esc(t.name)}. Pick a card.</span>`];
   runIntro(startTurnTimer);
 }
 function onlineResolve(mc,oc){
@@ -2931,17 +3021,17 @@ function startDuel(opp,o={}){
   const myLv={};S.deck.forEach(id=>myLv[id]=S.cards[id].l);
   const tier=rankOf(S.trophies);
   const avg=Math.max(1,Math.round(S.deck.reduce((a,id)=>a+S.cards[id].l,0)/6));
-  const opDeck=aiDeck(tier), opLv={};opDeck.forEach(id=>opLv[id]=Math.min(MAXLV,avg+(tier>=3?1:0)));
+  const opDeck=opp&&opp.deck||aiDeck(tier), opLv=opp&&opp.lv?{...opp.lv}:{};opDeck.forEach(id=>{if(!opLv[id])opLv[id]=Math.min(MAXLV,avg+(tier>=3?1:0))});
   const opChar=opp&&opp.char||pick(Object.keys(CHARS).filter(k=>!CHARS[k].hidden&&k!==S.char)), opName=opp&&opp.name||pick(OUTLAWS);
   D={turn:1,sel:null,busy:false,lines:[],reveal:null,over:null,cd:null,slam:false,
-    tier,arena:tier,map:curMap(),hist:[],
+    tier:opp&&opp.tier!=null?opp.tier:tier,arena:tier,map:curMap(),hist:[],tourney:o.tourney||null,
     qd:shuffle([2,3,4,5,6,7,8,9]).slice(0,rand(1,3)),
     me:makeSide(true,'You',S.char,S.deck,myLv),
     op:makeSide(false,opName,opChar,opDeck,opLv),friendly:!!o.friendly,pvp:!!o.friendly};
   if(D.friendly)Object.assign(D.op,{who:'Pete',obj:'Pete',poss:"Pete's"});
-  else D.chal=pick(CHAL);
+  else if(!D.tourney)D.chal=pick(CHAL);
   D.cnt={shoot:0,defend:0,trick:0,extra:0,hold:0,heal:0,blocks:0,combos:0};D.lowest=1;D.opBack=pick(Object.keys(BACKS));
-  D.lines=[`<span class="hint">${D.friendly?`Friendly duel with ${D.op.name}.`:`${D.op.name} (${RANKS[tier].skill}) draws as ${CHARS[opChar].name}.`} Pick a card.</span>`];
+  D.lines=[`<span class="hint">${D.friendly?`Friendly duel with ${D.op.name}.`:D.tourney?`Tournament duel: ${esc(D.op.name)} draws as ${CHARS[opChar].name}.`:`${D.op.name} (${RANKS[tier].skill}) draws as ${CHARS[opChar].name}.`} Pick a card.</span>`];
   runIntro(startTurnTimer);
 }
 
@@ -2959,6 +3049,7 @@ function startTurnTimer(){
   if(D.online&&D.online.early&&D.online.early.turn===D.turn){D.opPick=D.online.early.c;D.opReady=true;D.online.early=null}
   if(D.noTimer){D.deadline=null;drawDuel();return}
   D.deadline=performance.now()+TURN_MS;
+  try{tipsFor('duel')}catch(e){}
   let last=performance.now(), lastSec=Math.ceil(TURN_MS/1000);
   drawDuel();
   window.__turnTmr=setInterval(()=>{
@@ -3165,7 +3256,7 @@ function runIntro(done){
 const shortStat=(id,l)=>String(cstat(id,l)).replace('full block','block').replace('half block','½ block').replace('no damage','immune').replace(/ × /g,'×');
 function drawDuel(){
   const me=D.me, op=D.op, R=D.reveal, pvp=!!D.pvp, locked=!!D.lockedIn&&!R;
-  const hand=me.deck.map(id=>{
+  const hand=me.deck.filter(id=>!(D.hide&&D.hide.has(id))).map(id=>{
     const c=CARDS[id], used=me.used.has(id), lock=me.locked.has(id), cost=ecost(me,id), poor=!used&&!lock&&cost>me.pow, dis=used||lock||poor||D.busy||!!D.over||!!D.spec||locked;
     const cmb=!used&&!lock&&!poor&&!D.busy&&comboOf(me.prevCard,id);
     return `<button class="${tileCls(id)} hcard ${used||lock||poor?'used':''} ${cmb?'cmb':''}" ${cmb?`title="Combo: ${cmb.n} +${cmb.d}"`:''} data-a="pick" data-v="${id}" aria-pressed="${D.sel===id}" ${dis?'disabled':''} aria-label="${c.name}, costs ${cost} ammo${used?', used':lock?', locked':poor?', not enough ammo':''}">
@@ -3184,12 +3275,12 @@ function drawDuel(){
   let warn='';
   if(D.arena===1&&D.turn%4===0)warn='Snakebite this turn: both take 2';
   if(D.arena===3&&D.turn%3===0)warn='Train turn: Defend cards fail!';
-  const sub=D.spec?'Watching live':D.friendly?'Friendly duel':D.tut?'Practice duel':ar.rule;
+  const sub=D.spec?'Watching live':D.tourney?esc(D.tourney.title):D.friendly?'Friendly duel':D.tut?'Practice duel':ar.rule;
   let info;
   if(locked)info=`<span class="muted">${D.opReady?'Both ready…':`Waiting for ${esc(op.who)}…`}</span>`;
   else if(sel){const cb=comboOf(me.prevCard,D.sel);info=`<b>${sel.name}</b> · ${ecost(me,D.sel)} ammo · ${sel.text(cval(D.sel,me.lv[D.sel]))}${cb?` <b class="combol">Combo ${cb.n} +${cb.d}!</b>`:''}`}
   else info=`<span class="muted">Tap a card, then <b>Draw!</b></span>`;
-  layer().innerHTML=`<div class="duel ar-${D.map!=null?D.map:(D.arena||0)}" role="dialog" aria-modal="true" aria-label="Duel">
+  layer().innerHTML=`<div class="duel ar-${D.map!=null?D.map:(D.arena||0)}${D.story?' story'+(D.storyAmmo?' sammo':''):''}" role="dialog" aria-modal="true" aria-label="Duel">
     <div class="dtop gutter">
       <button class="iconbtn" data-a="forfeit" aria-label="Leave duel">${mi('u_flag',18,19)}</button>
       <div class="dmid"><b>Turn ${D.turn}</b><span title="${ar.ruleText}">${sub}</span></div>
@@ -3204,8 +3295,9 @@ function drawDuel(){
       ${warn?`<div class="warnchip">${icon('bolt',12,2.6)} ${warn}</div>`:''}
       ${D.chal&&!D.over?`<div class="chalchip" title="Bounty: do this and win for +${CHAL_GOLD} gold">${pic('coin',13)} ${D.chal.t} · +${CHAL_GOLD}</div>`:''}
       ${D.comboFx?`<div class="combofx ${D.comboFx.side}"><small>Combo</small><b>${D.comboFx.n}</b></div>`:''}
+      ${D.story&&D.tell&&!D.busy?(()=>{const t=STELLS[D.tell];return `<div class="tell" style="--tc:var(--${t[0]==='extra'?'gold':t[0]})"><span>${icon(t[0]==='extra'?'bullet':CATS[t[0]].icon,16,2.6)}</span>${t[1]}</div>`})():''}
       <div class="duo"><div class="spot">${opSpot}${opCap?`<div class="cap">${opCap}</div>`:''}</div><div class="vs">VS</div><div class="spot">${meSpot}${meCap?`<div class="cap">${meCap}</div>`:''}</div></div>
-      <div class="log" aria-live="polite">${D.lines.slice(0,2).map(l=>`<p>${l}</p>`).join('')}</div>
+      ${D.story?storyTable():`<div class="log" aria-live="polite">${D.lines.slice(0,2).map(l=>`<p>${l}</p>`).join('')}</div>`}
     </div>
     <div class="dfoot gutter">
       ${sidePanel(me,false)}
@@ -3419,6 +3511,7 @@ function checkEnd(){
 }
 function applyResult(r){
   if(D.tut||D.spec){D.res={tro:0,gold:0,chest:null,full:false};return}
+  if(D.tourney){S.st.played++;tReport(r);const xp=r==='win'?20:10;D.res={tro:0,gold:0,chest:null,full:false,xp,ups:addXP(xp),tour:r};save();checkAch();if(D.online)leaveOnline(D.online,true);return}
   S.st.played++;track('duel');
   if(r==='win'){track('win');if(D.me.hp<=5)S.st.close++;if(D.me.hp>=25)S.st.flawless++}
   const baseXP=r==='win'?30:r==='lose'?12:18;
@@ -3427,7 +3520,7 @@ function applyResult(r){
     const xp=Math.round(baseXP/2);D.res={tro:0,gold:0,chest:null,full:false,xp,ups:addXP(xp)};save();checkAch();return}
   const res={tro:0,gold:0,chest:null,full:false}, before=rankOf(S.trophies);
   if(r==='win'){S.st.streak++;S.st.best=Math.max(S.st.best,S.st.streak);res.streak=S.st.streak;res.bonus=streakBonus(S.st.streak);res.tro=TW+res.bonus;res.gold=20;S.wins++;
-    const roll=Math.random(), t=roll<.0067?'noman':roll<.06?'gold':roll<.3?'silver':'wood';
+    const roll=Math.random(), t=roll<.002?'noman':roll<.01?'royal':roll<.065?'gold':roll<.3?'silver':'wood';
     const i=S.slots.findIndex(s=>!s);if(i>=0){S.slots[i]={t};res.chest=t}else res.full=true;
     if(S.fwDay!==today()){S.fwDay=today();res.first=true;res.gold+=100;const j=S.slots.findIndex(s=>!s);if(j>=0){S.slots[j]={t:'silver'};res.firstChest=true}else res.gold+=150}
     if(D.lowest<=.25){S.st.comebacks++;res.comeback=true;res.gold+=40;res.tro+=4}
@@ -3447,7 +3540,7 @@ function resultMarkup(){
     ${r==='draw'?'':`<span class="resimg res-${r}" role="img" aria-label="${r==='win'?'Wanted poster stamped PAID':'A grave with a cowboy hat'}"></span>`}
     <h1 class="${r==='win'?'win':'lose'}">${D.spec?(r==='win'?'Pete wins!':r==='lose'?'Pete lost':'Draw'):r==='win'?'Victory!':r==='lose'?'Defeat':'Draw'}</h1>
     <p class="muted" style="margin:0">${D.spec?(r==='win'?`${esc(D.op.name)} hits the dirt.`:r==='lose'?`${esc(D.op.name)} was quicker this time.`:'Nobody walks away the winner.'):r==='win'?`${D.op.name} hits the dirt.`:r==='lose'?`${D.op.name} was quicker this time.`:'Nobody walks away the winner.'}</p>
-    <div class="rewards rw3" ${D.tut||D.spec||D.friendly?'hidden':''}>
+    <div class="rewards rw3" ${D.tut||D.spec||D.friendly||D.tourney?'hidden':''}>
       <div class="rw">${pic('star',20)}<b class="num">${x.tro>=0?'+':''}${x.tro}</b><span>Trophies</span></div>
       <div class="rw">${pic('coin',20)}<b class="num">+${x.gold}</b><span>Gold</span></div>
       ${x.chest?`<div class="rw"><span class="rwbox">${chestSVG(x.chest)}</span><b class="rwn">${CHESTS[x.chest].name.replace(' Strongbox','')}</b><span>Strongbox</span></div>`:''}
@@ -3462,9 +3555,11 @@ function resultMarkup(){
     ${x.rankUp!=null?`<div class="rankup">${badge(x.rankUp,40)}<span>New rank: <b>${RANKS[x.rankUp].n}</b><br>Arena unlocked: ${RANKS[x.rankUp].a}</span></div>`:''}
     ${x.rankDown!=null?`<div class="rankup" style="background:rgba(0,0,0,.3);border-color:rgba(255,220,170,.25)">${badge(x.rankDown,32)}<span>Dropped to <b>${RANKS[x.rankDown].n}</b></span></div>`:''}
     ${x.full?'<div class="bonusrow off"><span>Strongbox slots full, no strongbox this time</span></div>':''}</div>
-    ${D.spec?`<button class="btn" style="width:100%;max-width:320px" data-a="backFriends">Back to friends</button>`:D.online?`<p class="muted" style="margin:0;text-align:center">Friendly duel with ${esc(D.online.their.name)}. No trophies won or lost.</p>
+    ${D.tourney?`<div class="tres">${pic('star',18)} <b>${esc(D.tourney.title)}:</b> ${r==='win'?'+3 points':r==='draw'?'+1 point':'no points'}</div>
+    <div style="display:flex;gap:10px;width:100%;max-width:320px"><button class="btn ghost" style="flex:1" data-a="tBack">Tournament</button><button class="btn" style="flex:1" data-a="tAgain">Duel again</button></div>`:D.spec?`<button class="btn" style="width:100%;max-width:320px" data-a="backFriends">Back to friends</button>`:D.online?`<p class="muted" style="margin:0;text-align:center">Friendly duel with ${esc(D.online.their.name)}. No trophies won or lost.</p>
     <div style="display:flex;gap:10px;width:100%;max-width:320px"><button class="btn ghost" style="flex:1" data-a="backFriends">Friends</button><button class="btn" style="flex:1" data-a="rematchFriend" data-v="${D.online.fr.id}">Rematch</button></div>`:D.friendly?`<p class="muted" style="margin:0;text-align:center">Friendly duel. No trophies won or lost.<br>You ${(S.vsPete||{w:0}).w}–${(S.vsPete||{l:0}).l} Pete</p>
-    <div style="display:flex;gap:10px;width:100%;max-width:320px"><button class="btn ghost" style="flex:1" data-a="backFriends">Friends</button><button class="btn" style="flex:1" data-a="challengePete">Rematch</button></div>`:D.tut?`<p class="muted" style="margin:0;text-align:center">Practice duel. No trophies won or lost.</p>
+    <div style="display:flex;gap:10px;width:100%;max-width:320px"><button class="btn ghost" style="flex:1" data-a="backFriends">Friends</button><button class="btn" style="flex:1" data-a="challengePete">Rematch</button></div>`:D.story&&TUT&&TUT.full?`<div class="firstbox"><span class="rwbox">${chestSVG('silver')}</span><b>Your first strongbox!</b></div>
+    <button class="btn" style="width:100%;max-width:320px" data-a="tutDuelDone">Open it!</button>`:D.tut?`<p class="muted" style="margin:0;text-align:center">Practice duel. No trophies won or lost.</p>
     <button class="btn" style="width:100%;max-width:320px" data-a="tutDuelDone">Continue</button>`:`<div style="display:flex;gap:10px;width:100%;max-width:320px">
       <button class="btn ghost" style="flex:1" data-a="leaveDuel">Home</button>
       <button class="btn" style="flex:1" data-a="rematch">Duel again</button>
@@ -3560,7 +3655,7 @@ document.addEventListener('click',e=>{if(eatClick){e.stopPropagation();e.prevent
 
 /* ---------- actions ---------- */
 const A={
-  tab:v=>{UI.drawer=false;const O=['home','deck','posse','shop'],d=O.indexOf(v)-O.indexOf(UI.tab);UI.tab=v;UI.swap=null;if(CH&&CH.opened)CH=null;render();const sc=document.getElementById('screen');sc.scrollTop=0;if(d){sc.classList.remove('sw-l','sw-r');void sc.offsetWidth;sc.classList.add(d>0?'sw-r':'sw-l');0}},
+  tab:v=>{UI.drawer=false;const O=['home','deck','posse','shop','cup'],d=O.indexOf(v)-O.indexOf(UI.tab);UI.tab=v;UI.swap=null;if(CH&&CH.opened)CH=null;render();const sc=document.getElementById('screen');sc.scrollTop=0;if(d){sc.classList.remove('sw-l','sw-r');void sc.offsetWidth;sc.classList.add(d>0?'sw-r':'sw-l');0}},
   duel:()=>{if(deckIssues(S.deck).length)return;if(!S.seenRules)rulesSheet(true);else findMatch()},
   startDuel:()=>startDuel(),
   findMatch:()=>findMatch(),
@@ -3583,11 +3678,11 @@ const A={
   freeChest:()=>{if(S.freeAt>Date.now())return;S.freeAt=Date.now()+FREE_MS;save();openChest('wood')},
   chestTap:()=>chestTap(),
   ranks:()=>ranksScreen(),
-  startGame:()=>{const sp=document.querySelector('.splash2');if(sp&&!sp.classList.contains('leaving')){sp.classList.add('leaving');ac();music();setTimeout(A.startGame,420);return}closeLayer();ac();music();if(!S.name){nameScreen(true);return}if(!S.onboarded)setTimeout(()=>startTutorial(true),400)},
+  startGame:()=>{const sp=document.querySelector('.splash2');if(sp&&!sp.classList.contains('leaving')){sp.classList.add('leaving');ac();music();setTimeout(A.startGame,420);return}closeLayer();ac();music();if(!S.onboarded){setTimeout(()=>startTutorial(true),250);return}if(!S.name){nameScreen(true);return}if(false)setTimeout(()=>startTutorial(true),400)},
   chestDone:()=>{CH=null;closeLayer();render()},
   boxNav:v=>{const n=boxList().length,d=+v,i=(UI.bi||0)+d;if(i<0||i>=n)return;UI.bi=i;UI.slide=d>0?'in-r':'in-l';sfx('tap');render()},
   hold:()=>{if(!D||D.busy||D.over||D.lockedIn)return;D.sel='hold';sfx('dry');if(D.pvp)lockIn();else fire()},
-  pick:v=>{if(!D||D.busy||D.over||D.lockedIn)return;if(ecost(D.me,v)>D.me.pow)return;D.sel=D.sel===v?null:v;vibe(6);sfx(D.sel?'card':'tap');drawDuel()},
+  pick:v=>{if(!D||D.busy||D.over||D.lockedIn)return;if(ecost(D.me,v)>D.me.pow)return;if(storyPick(v))return;D.sel=D.sel===v?null:v;vibe(6);sfx(D.sel?'card':'tap');drawDuel()},
   mute:()=>{const off=!(S.muted&&S.musicOff);S.muted=off;S.musicOff=off;save();music();if(D)drawDuel()},
   settings:()=>settingsSheet(),
   setMap:v=>{S.map=+v;save();const b=document.querySelector('.hd-body'),y=b?b.scrollTop:0;render();const nb=document.querySelector('.hd-body');if(nb)nb.scrollTop=y},
@@ -3595,7 +3690,7 @@ const A={
   challengeFriend:v=>challengeFriend(v),
   rematchFriend:v=>{clearInterval(window.__turnTmr);if(D&&D.online)leaveOnline(D.online,true);D=null;render();challengeFriend(v)},
   cancelChallenge:()=>{if(NET.cancelCh)NET.cancelCh()},
-  cancelOnline:()=>{if(NET.cur)leaveOnline(NET.cur);closeLayer();friendsScreen()},
+  cancelOnline:()=>{const tr=NET.cur&&NET.cur.tour;if(NET.cur)leaveOnline(NET.cur);closeLayer();if(tr){UI.tab='cup';render();return}friendsScreen()},
   answerChallenge:v=>answerChallenge(v==='1'),
   answerFriend:v=>{const [fid,y]=v.split(':');netAnswer(+fid,y==='1')},
   removeFriend:v=>netRemove(+v),
@@ -3615,6 +3710,13 @@ const A={
   rename:()=>{UI.ptag=null;nameScreen(false)},
   showPw:v=>{const i=document.getElementById(v);if(!i)return;const s=i.type==='password';i.type=s?'text':'password';const b=document.querySelector(`[data-a="showPw"][data-v="${v}"]`);if(b)b.textContent=s?'Hide':'Show'},
   loginScreen:()=>loginScreen(),
+  tJoin:v=>tJoin(v),tPlay:v=>tPlay(v),tCancelSeek:()=>tCancelSeek(),tReload:()=>{TR.loaded=false;render()},
+  tAdmin:()=>tAdminSheet(),tCreate:()=>tCreate(),tEndNow:v=>tAdminAsk('end',v),tCancelT:v=>tAdminAsk('cancel',v),
+  tAdminDo:v=>{const [f,id]=v.split(':');tAdminAct(f,id)},
+  tOpenPrize:v=>{const L=v.split(',').filter(k=>CHESTS[k]);const first=L.shift();L.forEach(k=>{const i=S.slots.findIndex(s=>!s);if(i>=0)S.slots[i]={t:k};else S.gold+=300});save();closeLayer();if(first)openChest(first)},
+  tBack:()=>{clearInterval(window.__turnTmr);if(D&&D.online)leaveOnline(D.online);D=null;closeLayer();UI.tab='cup';render();tRefresh()},
+  tAgain:()=>{const tid=D&&D.tourney&&D.tourney.tid;if(D&&D.online)leaveOnline(D.online);D=null;closeLayer();UI.tab='cup';render();if(tid)tLoad().then(()=>tPlay(tid))},
+  splashLogin:()=>{ac();music();closeLayer();loginScreen()},
   newPlayer:()=>{UI.ptag=null;nameScreen(true)},
   doLogin:()=>doLogin(),
   pwSheet:()=>pwSheet(),
@@ -3632,7 +3734,7 @@ const A={
     else if(v){S.needPw=true}
     if(b)b.disabled=false;
     S.name=r.name;S.tag=r.tag;UI.ptag=null;save();render();if(v&&!NET.ok)setTimeout(()=>toast('Offline: make your password later in Settings'),2600);
-    if(v){closeLayer();toast(`Welcome, ${S.name}!`);if(!S.onboarded)setTimeout(()=>startTutorial(true),500)}else{profileScreen();toast('Name saved')}},
+    if(v){closeLayer();toast(`Welcome, ${S.name}!`);if(!S.onboarded&&!TUT)setTimeout(()=>startTutorial(true),500)}else{profileScreen();toast('Name saved')}},
   achievements:()=>achievementsScreen(),
   claimBounty:v=>{ensureBounties();const x=S.bounties[+v];if(!x||x.c)return;const b=BOUNTY_POOL[x.i];if(x.p<b.n)return;x.c=true;S.gold+=b.g;S.st.bounties++;save();sfx('coin');vibe(20);toast(`Bounty done! +${b.g} gold`);checkAch();const sc=document.getElementById('screen'),y=sc.scrollTop;render();sc.scrollTop=y},
   useDeck:v=>{const i=+v;if(i===(S.deckI||0))return;S.decks[S.deckI||0]=S.deck.slice();S.deckI=i;S.deck=S.decks[i].slice();UI.swap=null;save();render()},
@@ -3646,16 +3748,16 @@ const A={
   backFriends:()=>{clearInterval(window.__turnTmr);if(D&&D.online)leaveOnline(D.online);D=null;render();friendsScreen()},
   toggle:v=>{if(v==='vibe'){S.vibeOff=!S.vibeOff;if(!S.vibeOff)vibe(30)}else if(v==='music'){S.musicOff=!S.musicOff;music()}else{S.muted=!S.muted;if(!S.muted)sfx('tap')}save();settingsSheet()},
   tutorial:()=>{closeLayer();startTutorial(false)},
-  tutDuelDone:()=>{D=null;closeLayer();UI.tab='home';render()},
+  tutDuelDone:()=>{const st=D&&D.story&&TUT&&TUT.full;D=null;closeLayer();if(st){openChest('silver');return}UI.tab='home';render()},
   fire:()=>{if(D&&D.pvp)lockIn();else fire()},
-  forfeit:()=>{if(D.spec){A.backFriends();return}if(D.over){A.leaveDuel();return}
+  forfeit:()=>{if(D.tourney&&D.online&&!D.over){tReport('lose');leaveOnline(D.online);A.tBack();toast('You left. It counts as a loss.');return}if(D.tut&&TUT&&TUT.full){toast('Finish the tutorial first. It only takes a minute!');return}if(D.spec){A.backFriends();return}if(D.over){A.leaveDuel();return}
     if(D.online){leaveOnline(D.online);A.backFriends();return}
     if(D.friendly){A.backFriends();return}
     const keep=layer().innerHTML;
     sheet(`<h2 style="text-align:center;font-size:22px">Leave the duel?</h2><p class="desc muted">${D.tut?'This ends the practice duel.':`Leaving counts as a loss (−${TL} trophies).`}</p>
       <div class="row2"><button class="btn ghost" data-a="stay">Keep fighting</button><button class="btn fire" data-a="giveUp">Leave</button></div>`);
     A.close=()=>{layer().innerHTML=keep;A.close=closeDefault};A.stay=()=>A.close();},
-  giveUp:()=>{A.close=closeDefault;if(D&&D.tut){D=null;closeLayer();tutEnd(true);render();return}S.trophies=Math.max(0,S.trophies-TL);S.losses++;S.st.streak=0;save();D=null;closeLayer();render()},
+  giveUp:()=>{A.close=closeDefault;if(D&&D.tourney){tReport('lose');A.tBack();return}if(D&&D.tut){D=null;closeLayer();tutEnd(true);render();return}S.trophies=Math.max(0,S.trophies-TL);S.losses++;S.st.streak=0;save();D=null;closeLayer();render()},
   leaveDuel:()=>{if(D&&D.online)leaveOnline(D.online);D=null;closeLayer();render()},
   rematch:()=>{D=null;findMatch()}
 };
@@ -3677,7 +3779,7 @@ document.addEventListener('click',e=>{
 });
 let SW=null;
 ['pointerdown','touchend'].forEach(ev=>document.addEventListener(ev,()=>{const c=ac();if(!c)return;if(!window.__unl){window.__unl=1;try{const b=c.createBuffer(1,1,22050),s=c.createBufferSource();s.buffer=b;s.connect(c.destination);s.start(0)}catch(e){}}music()},{capture:true,passive:true}));
-const NOCLICK=new Set(['pick','hold','fire','startGame','chestTap','openSlot','freeChest','buyChest','chestDone','claimRoad','claimBounty','claimChar','duel','startDuel','findMatch','rematch','boxNav','sayEmote','upgrade','tutDuelDone']);
+const NOCLICK=new Set(['tPlay','tJoin','splashLogin','pick','hold','fire','startGame','chestTap','openSlot','freeChest','buyChest','chestDone','claimRoad','claimBounty','claimChar','duel','startDuel','findMatch','rematch','boxNav','sayEmote','upgrade','tutDuelDone']);
 document.addEventListener('pointerdown',e=>{if(UI.tab==='shop'&&!CH&&e.target.closest('.booth')&&!e.target.closest('button'))SW={x:e.clientX,y:e.clientY}});
 document.addEventListener('pointerup',e=>{if(!SW)return;const dx=e.clientX-SW.x,dy=e.clientY-SW.y;SW=null;if(Math.abs(dx)>50&&Math.abs(dy)<70)A.boxNav(dx<0?1:-1)});
 document.addEventListener('keydown',e=>{if(UI.tab==='shop'&&!CH&&!layer().innerHTML&&(e.key==='ArrowLeft'||e.key==='ArrowRight'))A.boxNav(e.key==='ArrowRight'?1:-1)});
@@ -3736,6 +3838,176 @@ document.addEventListener('visibilitychange',()=>{if(S)music();
 });
 document.addEventListener('input',e=>{if(e.target.id==='sfxvol'){e.target.style.setProperty('--p',e.target.value+'%');S.sfxVol=e.target.value/100;if(SFXBUS)SFXBUS.gain.value=S.sfxVol;const l=document.getElementById('sfxvoll');if(l)l.textContent=e.target.value+'%';clearTimeout(window.__svs);window.__svs=setTimeout(()=>{save();sfx('shot')},250);return}if(e.target.id==='musvol'){e.target.style.setProperty('--p',e.target.value+'%');S.musicVol=e.target.value/100;music();const l=document.getElementById('musvoll');if(l)l.textContent=e.target.value+'%';clearTimeout(window.__mvs);window.__mvs=setTimeout(save,300)}});
 
+/* ================= tournaments ================= */
+const TR={list:[],past:null,entries:{},loaded:false,busy:false,seek:null,timer:null};
+const tNow=()=>Date.now();
+const tMs=s=>new Date(s).getTime();
+function tLeft(ms){if(ms<=0)return '0m';const d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5),m=Math.floor(ms%36e5/6e4);return d?`${d}d ${h}h`:h?`${h}h ${m}m`:`${Math.max(1,m)}m`}
+const myEntry=t=>(TR.entries[t.id]||[]).find(e=>e.uid===NET.me);
+const tPot=t=>(TR.entries[t.id]||[]).reduce((a,e)=>a+(e.paid||0),0);
+const placeTxt=n=>n===1?'1st':n===2?'2nd':n===3?'3rd':n+'th';
+function mySnap(){return {name:S.name,tag:S.tag,char:S.char,trophies:S.trophies,deck:S.deck.slice(),lv:Object.fromEntries(S.deck.map(id=>[id,(S.cards[id]||{l:1}).l]))}}
+async function tLoad(){
+  if(!NET.ok){TR.loaded=true;return}
+  try{
+    const sb=NET.sb;
+    const {data:open}=await sb.from('tournaments').select('*').eq('status','open').order('starts_at',{ascending:true});
+    for(const t of open||[])if(tMs(t.ends_at)<=tNow())await sb.rpc('sg_t_finish',{p_tid:t.id,p_force:false});
+    const {data:open2}=await sb.from('tournaments').select('*').eq('status','open').order('starts_at',{ascending:true});
+    const {data:past}=await sb.from('tournaments').select('*').neq('status','open').order('ends_at',{ascending:false}).limit(1);
+    TR.list=open2||[];TR.past=(past||[])[0]||null;
+    const ids=[...TR.list,...(TR.past?[TR.past]:[])].map(t=>t.id);
+    TR.entries={};
+    if(ids.length){const {data:es}=await sb.from('t_entries').select('tid,uid,name,tag,char,points,wins,losses,duels,paid,place,prize_gold,prize_chest,last_seen,seeking_at,joined_at').in('tid',ids);
+      (es||[]).forEach(e=>(TR.entries[e.tid]=TR.entries[e.tid]||[]).push(e));
+      Object.values(TR.entries).forEach(L=>L.sort((a,b)=>(a.place||0)&&(b.place||0)?a.place-b.place:(b.points-a.points)||(b.wins-a.wins)||(a.losses-b.losses)||(tMs(a.joined_at)-tMs(b.joined_at))));}
+    if(NET.admin==null){try{const {data}=await sb.rpc('sg_is_admin');NET.admin=!!data}catch(e){NET.admin=false}}
+  }catch(e){console.warn(e)}
+  TR.loaded=true;
+}
+function tRefresh(){tLoad().then(()=>{if(UI.tab==='cup'&&!D&&!CH&&!layer().querySelector('.mm,.sheet')){const sc=document.getElementById('screen'),y=sc.scrollTop;render();sc.scrollTop=y}})}
+function prizeRow(t,i,pot){
+  const ch=(t.chests||[])[i], pct=(t.split||[])[i]||0, g=Math.floor(pot*pct/100);
+  return `<div class="tp tp${i+1}"><span class="tpl">${placeTxt(i+1)}</span>${ch&&CHESTS[ch]?`<span class="tpbox">${chestSVG(ch)}</span>`:'<span class="tpbox"></span>'}<b>${pic('coin',14)} ${g}</b><small>${pct}% of pot${ch&&CHESTS[ch]?` + ${CHESTS[ch].name.replace(' Strongbox','')}`:''}</small></div>`;
+}
+function boardRows(t,L,live){
+  const me=NET.me, top=L.slice(0,20);const mi_=L.findIndex(e=>e.uid===me);
+  if(mi_>=20)top.push(L[mi_]);
+  return top.map(e=>{const i=L.indexOf(e),on=live&&(e.seeking_at&&tNow()-tMs(e.seeking_at)<15000||e.last_seen&&tNow()-tMs(e.last_seen)<120000);
+    return `<div class="trow ${e.uid===me?'me':''} ${i<3?'top'+(i+1):''}"><span class="trk">${e.place||i+1}</span><span class="tava">${bust(CHARS[e.char]?e.char:'dusty',34)}</span><span class="tnm"><b>${esc(e.name||'?')}</b><small>#${esc(e.tag||'')}${on?' · <i class="ondot"></i>online':''}</small></span><span class="tpt"><b>${e.points}</b><small>${e.wins}W ${e.losses}L</small></span></div>`}).join('');
+}
+function cupScreen(){
+  if(!TR.loaded){tRefresh();return `<div class="tempty">${CYL}<p>Loading tournaments…</p></div>`}
+  if(!NET.ok)return `<div class="tempty"><h2>Tournaments</h2><p>Tournaments need the internet. Check your connection and try again.</p><button class="btn" data-a="tReload">Try again</button></div>`;
+  if(!S.name)return `<div class="tempty"><h2>Tournaments</h2><p>Pick a name first.</p></div>`;
+  const admin=NET.admin?`<button class="btn ghost wide" data-a="tAdmin">${icon('star',16,2.4)} Admin: tournaments</button>`:'';
+  const cards=TR.list.map(t=>{
+    const L=TR.entries[t.id]||[], e=myEntry(t), pot=tPot(t), started=tNow()>=tMs(t.starts_at), left=tMs(t.ends_at)-tNow();
+    const full=t.max_players&&L.length>=t.max_players, outOf=t.max_duels&&e&&e.duels>=t.max_duels;
+    const rank=e?L.indexOf(e)+1:0;
+    let act;
+    if(!e)act=full?`<button class="btn wide" disabled>Full</button>`:`<button class="btn wide tjoin" data-a="tJoin" data-v="${t.id}" ${S.gold<t.fee?'disabled':''}>Join for ${pic('coin',16)} ${t.fee}</button>${S.gold<t.fee?`<small class="tnote">You need ${t.fee-S.gold} more gold</small>`:''}`;
+    else if(!started)act=`<button class="btn wide" disabled>Starts in ${tLeft(tMs(t.starts_at)-tNow())}</button>`;
+    else if(outOf)act=`<button class="btn wide" disabled>All ${t.max_duels} duels played</button>`;
+    else act=`<button class="btn wide tplay" data-a="tPlay" data-v="${t.id}">${mi('t_duel',26,24)} Tournament duel</button>${t.max_duels?`<small class="tnote">${t.max_duels-e.duels} duels left</small>`:''}`;
+    return `<section class="tcard">
+      <div class="thead"><div><div class="eyebrow">${started?`Ends in ${tLeft(left)}`:`Starts in ${tLeft(tMs(t.starts_at)-tNow())}`}</div><h2>${esc(t.title)}</h2></div>
+        <div class="tpot"><small>Prize pot</small><b>${pic('coin',18)} ${pot}</b></div></div>
+      <div class="tprizes">${[0,1,2].map(i=>prizeRow(t,i,pot)).join('')}</div>
+      <div class="tmeta"><span>${L.length}${t.max_players?'/'+t.max_players:''} players</span><span>${L.length<t.min_players?`Needs ${t.min_players} to start the prizes`:'Prizes are on!'}</span></div>
+      ${e?`<div class="tyou"><span>You: <b>${placeTxt(rank)}</b></span><span><b>${e.points}</b> points</span><span>${e.wins}W ${e.losses}L</span></div>`:''}
+      ${act}
+      <p class="thelp">Win = 3 points, draw = 1. If someone else is searching at the same time, you duel the <b>real player</b>. If not, you duel a <b>ghost</b> of a player in the tournament.</p>
+      ${L.length?`<div class="tboard">${boardRows(t,L,true)}</div>`:'<p class="thelp">No one has joined yet. Be the first!</p>'}
+    </section>`}).join('');
+  const p=TR.past, PL=p?TR.entries[p.id]||[]:[];
+  const past=p?`<section class="tcard tpast"><div class="thead"><div><div class="eyebrow">${p.status==='cancelled'?'Cancelled · fees paid back':'Finished'}</div><h2>${esc(p.title)}</h2></div></div>
+    ${p.status==='done'&&PL.length?`<div class="tboard">${boardRows(p,PL,false)}</div>`:'<p class="thelp">Not enough players joined, so everyone got their gold back.</p>'}</section>`:'';
+  return `<div class="cuphead"><h1>Tournaments</h1><button class="iconbtn" data-a="tReload" aria-label="Refresh">${icon('swap',18,2.4)}</button></div>
+    ${admin}
+    ${cards||'<div class="tempty sm"><p>No tournament running right now. Check back soon!</p></div>'}
+    ${past}`;
+}
+async function tJoin(tid){
+  const t=TR.list.find(x=>x.id===tid);if(!t)return;
+  if(S.gold<t.fee){toast('Not enough gold');sfx('early');return}
+  const b=document.querySelector('[data-a="tJoin"]');if(b)b.disabled=true;
+  if(!NET.synced)await netSyncProfile();
+  const {data,error}=await NET.sb.rpc('sg_t_join',{p_tid:tid,p:mySnap()});
+  if(error||data){if(b)b.disabled=false;toast(data||'Could not join. Try again.');sfx('early');return}
+  S.gold-=t.fee;save();sfx('coin');toast(`You're in! Good luck, ${S.name}.`);await tLoad();render();
+}
+/* tournament duel: look for a real player for a few seconds, otherwise a ghost */
+async function tPlay(tid){
+  const t=TR.list.find(x=>x.id===tid);if(!t||TR.seek)return;
+  if(deckIssues(S.deck).length){toast('Fix your deck first');return}
+  clearMM();
+  const sk=TR.seek={tid,t0:tNow(),done:false};
+  const draw=()=>{if(TR.seek!==sk)return;layer().innerHTML=`<div class="mm" role="dialog" aria-modal="true" aria-label="Finding a tournament opponent">${CYL}<h2>${esc(t.title)}</h2><div class="tm">${fmtLeft(tNow()-sk.t0)}</div><div class="st">Looking for a <b>real player</b> who is searching right now…</div><button class="btn ghost sm" data-a="tCancelSeek">Cancel</button></div>`};
+  draw();
+  try{NET.sb.rpc('sg_t_update',{p_tid:tid,p:mySnap()})}catch(e){}
+  const go=r=>{if(sk.done)return;sk.done=true;clearInterval(sk.iv);TR.seek=null;
+    if(r&&r.cid){const o=r.opp||{};startOnline(r.cid,!!r.host,{id:o.uid,name:o.name||'Rival',char:o.char},{tid,opp:o,t});return}
+    tGhost(t)};
+  const poll=async()=>{if(sk.done||TR.seek!==sk)return;draw();
+    try{const {data}=await NET.sb.rpc('sg_t_seek',{p_tid:tid});if(data&&data.err){sk.done=true;clearInterval(sk.iv);TR.seek=null;closeLayer();toast(data.err);return}if(data&&data.cid)return go(data)}catch(e){}
+    if(tNow()-sk.t0>6500){let r=null;try{const {data}=await NET.sb.rpc('sg_t_unseek',{p_tid:tid});r=data}catch(e){}go(r&&r.cid?r:null)}};
+  sk.iv=setInterval(poll,1300);poll();
+}
+function tCancelSeek(){const sk=TR.seek;if(!sk)return;sk.done=true;clearInterval(sk.iv);TR.seek=null;try{NET.sb.rpc('sg_t_unseek',{p_tid:sk.tid})}catch(e){}closeLayer()}
+function tGhost(t){
+  const others=(TR.entries[t.id]||[]).filter(e=>e.uid!==NET.me);
+  NET.sb.from('t_entries').select('uid,name,tag,char,trophies,deck,lv').eq('tid',t.id).neq('uid',NET.me).then(({data})=>{
+    const pool=(data||[]).filter(e=>Array.isArray(e.deck)&&e.deck.length===6&&e.deck.every(id=>CARDS[id]));
+    let o;
+    if(pool.length){const g=pick(pool);o={name:`${g.name} (ghost)`,char:CHARS[g.char]?g.char:'dusty',deck:g.deck,lv:g.lv||{},tier:Math.min(4,rankOf(g.trophies||0)),ghostOf:g.uid}}
+    else o={name:`${pick(OUTLAWS)} (outlaw)`,char:pick(Object.keys(CHARS).filter(k=>!CHARS[k].hidden&&k!==S.char)),tier:Math.max(1,rankOf(S.trophies))};
+    MM={t0:tNow(),phase:'found',tier:rankOf(S.trophies),opp:o,timers:[]};drawMM();
+    const lab=document.querySelector('.mm .botchip');if(lab)lab.textContent=pool.length?'Ghost of a real player':'Outlaw';
+    const st=document.querySelector('.mm .st');if(st)st.textContent=`${t.title} · tournament duel`;
+    MM.timers.push(setTimeout(()=>{if(!MM)return;clearMM();startDuel(o,{tourney:{tid:t.id,title:t.title,ghost:true}})},2200));
+  },()=>{closeLayer();toast('Could not reach the tournament. Try again.')});
+  void others;
+}
+function tReport(r){
+  const tt=D&&D.tourney;if(!tt||tt.reported)return;tt.reported=true;
+  try{NET.sb.rpc('sg_t_report',{p_tid:tt.tid,p_result:r}).then(()=>tLoad(),()=>{})}catch(e){}
+}
+/* prizes from finished tournaments */
+async function tClaim(){
+  if(!NET.ok||!S.name||D||CH||TUT||TR.claiming)return;
+  TR.claiming=true;
+  try{
+    const {data}=await NET.sb.rpc('sg_t_claim');
+    const L=Array.isArray(data)?data:[];
+    if(L.length){
+      let chests=[];
+      L.forEach(x=>{S.gold+=x.prize_gold||0;if(x.prize_chest&&CHESTS[x.prize_chest])chests.push(x.prize_chest)});
+      save();
+      const x=L[0];
+      sheet(`<div class="tclaim">${x.status==='cancelled'?`<h2>${esc(x.title)} was cancelled</h2><p class="muted">Not enough players joined, so you got your entry fee back.</p>`:`<div class="tplace p${x.place}">${placeTxt(x.place)}</div><h2>${esc(x.title)}</h2><p class="muted">You finished <b style="color:var(--fg)">${placeTxt(x.place)}</b>! Here's your prize.</p>`}
+        <div class="tgot">${L.reduce((a,y)=>a+(y.prize_gold||0),0)?`<span>${pic('coin',22)} <b>+${L.reduce((a,y)=>a+(y.prize_gold||0),0)}</b></span>`:''}${chests.map(c=>`<span class="tgbox">${chestSVG(c)}</span>`).join('')}</div>
+        ${chests.length?`<button class="btn wide" data-a="tOpenPrize" data-v="${chests.join(',')}">Open ${chests.length>1?'them':'it'}!</button>`:'<button class="btn wide" data-a="close">Nice!</button>'}</div>`);
+      sfx('friend');vibe([30,60,30]);
+    }
+  }catch(e){}
+  TR.claiming=false;
+}
+/* ---------- admin ---------- */
+function tAdminSheet(){
+  const pad=n=>String(n).padStart(2,'0'), dl=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  const now=new Date(), end=new Date(now.getTime()+7*864e5);
+  const chestSel=(id,def)=>`<select id="${id}">${['','wood','silver','gold','royal','noman'].map(k=>`<option value="${k}" ${k===def?'selected':''}>${k?CHESTS[k].name:'No box'}</option>`).join('')}</select>`;
+  const list=TR.list.map(t=>`<div class="tadm"><span><b>${esc(t.title)}</b><small>${(TR.entries[t.id]||[]).length} players · fee ${t.fee} · ends ${new Date(t.ends_at).toLocaleString()}</small></span><button class="btn ghost sm" data-a="tEndNow" data-v="${t.id}">End now</button><button class="btn ghost sm" data-a="tCancelT" data-v="${t.id}">Cancel</button></div>`).join('')||'<p class="muted" style="margin:0">No open tournaments.</p>';
+  sheet(`<h2 style="text-align:center;margin:0">Admin: tournaments</h2>
+    <div class="tform">
+      <label>Name<input id="taT" value="Weekly Showdown" maxlength="40"></label>
+      <div class="tf2"><label>Starts<input id="taS" type="datetime-local" value="${dl(now)}"></label><label>Ends<input id="taE" type="datetime-local" value="${dl(end)}"></label></div>
+      <div class="tf3"><label>Entry fee<input id="taF" type="number" min="0" step="50" value="100"></label><label>Min players<input id="taMin" type="number" min="1" value="3"></label><label>Max players<input id="taMax" type="number" min="0" value="" placeholder="No limit"></label></div>
+      <label>Duels per player<input id="taD" type="number" min="0" value="0" placeholder="0 = no limit"><small>0 = no limit</small></label>
+      <div class="tf3"><label>1st %<input id="taP1" type="number" min="0" max="100" value="70"></label><label>2nd %<input id="taP2" type="number" min="0" max="100" value="20"></label><label>3rd %<input id="taP3" type="number" min="0" max="100" value="10"></label></div>
+      <div class="tf3"><label>1st box${chestSel('taC1','royal')}</label><label>2nd box${chestSel('taC2','gold')}</label><label>3rd box${chestSel('taC3','silver')}</label></div>
+      <div class="np-err" id="taErr"></div>
+      <button class="btn wide" data-a="tCreate">Create tournament</button>
+    </div>
+    <h3 style="margin:6px 0 0">Open tournaments</h3>${list}
+    <button class="btn ghost wide" data-a="close">Close</button>`);
+}
+async function tCreate(){
+  const v=id=>(document.getElementById(id)||{}).value||'', n=id=>parseInt(v(id),10);
+  const e=document.getElementById('taErr');
+  const p={title:v('taT'),starts_at:new Date(v('taS')).toISOString(),ends_at:new Date(v('taE')).toISOString(),fee:n('taF')||0,min_players:n('taMin')||1,max_players:v('taMax')?n('taMax'):'',max_duels:n('taD')||0,split:[n('taP1')||0,n('taP2')||0,n('taP3')||0],chests:[v('taC1'),v('taC2'),v('taC3')]};
+  if(p.split.reduce((a,b)=>a+b,0)>100){if(e)e.textContent='The prize split adds up to more than 100%.';return}
+  const {data,error}=await NET.sb.rpc('sg_t_create',{p});
+  if(error||data){if(e)e.textContent=data||'Could not create it.';sfx('early');return}
+  sfx('bling');toast('Tournament created');await tLoad();closeLayer();render();
+}
+function tAdminAsk(fn,tid){const t=TR.list.find(x=>x.id===tid);if(!t)return;
+  sheet(`<h2 style="text-align:center;margin:0">${fn==='end'?'End':'Cancel'} ${esc(t.title)}?</h2><p class="muted" style="text-align:center;margin:0">${fn==='end'?'It ends right now and the top 3 get their prizes.':'Everyone gets their entry fee back. Nobody wins prizes.'}</p>
+    <div class="row2"><button class="btn ghost" data-a="tAdmin">Back</button><button class="btn" data-a="tAdminDo" data-v="${fn}:${tid}">${fn==='end'?'End it now':'Cancel it'}</button></div>`)}
+async function tAdminAct(fn,tid){const {data}=fn==='end'?await NET.sb.rpc('sg_t_finish',{p_tid:tid,p_force:true}):await NET.sb.rpc('sg_t_cancel',{p_tid:tid});
+  toast(fn==='end'?'Tournament ended':'Tournament cancelled, fees paid back');await tLoad();closeLayer();render();tClaim()}
+
 /* ---------- settings ---------- */
 function settingsSheet(){
   const tog=(k,label,sub,on)=>`<button class="setrow" role="switch" aria-checked="${on}" data-a="toggle" data-v="${k}"><span><b>${label}</b><small>${sub}</small></span><span class="sw ${on?'on':''}"><i></i></span></button>`;
@@ -3771,71 +4043,97 @@ function startTutorialDuel(){
 const T=(sel,text,o={})=>({sel,text,...o});
 const tw=f=>({wait:f});
 const chip=(k,l)=>`<b style="color:var(--${k})">${l}</b>`;
-function duelSteps(){return [
-  T(null,`Howdy, ${esc(pname())}! I'm Rosa. Let me show you how a duel works. <b>Tap anywhere</b> to go on.`),
-  {before:startTutorialDuel,wait:()=>D&&D.intro&&D.intro.phase==='peek'},
-  T('.peekgrid',`Before every duel you see your rival's 6 cards for <b>5 seconds</b>. Try to remember them!`),
-  T('.peekgrid',`In a real duel this goes away on its own. Here you can take your time. Ready?`,{after:()=>{if(D){D.intro=null;drawDuel()}}}),
-  T('.opbar',`This is your rival, Old Pete. The green bar is his <b>health</b>. Get it to 0 and you win.`),
-  T('.opbar .pips',`These are his 6 cards. Now you only see the <b>type</b>, not which card it is. Do you remember them?`),
-  T('.opbar .ammo',`This is his <b>ammo</b>. Every card costs ammo, so you can see what he can afford.`),
-  T('.mebar',`And this is you: your health and your ammo. You start with ${AMMO_START} ammo, get <b>+${AMMO_TURN} every turn</b>, and can hold up to ${MAXAMMO}.`),
-  T('.hand',`This is your hand. Each turn you both pick one card <b>in secret</b>. Then both cards flip at the same time.`),
-  T('.hand',`The colour shows the card's type. ${chip('shoot','Shoot')} beats ${chip('trick','Trick')}. ${chip('trick','Trick')} beats ${chip('defend','Defend')}. ${chip('defend','Defend')} beats ${chip('shoot','Shoot')}. ${chip('extra','Extra')} cards heal or help you.`),
-  T('.hcard[data-v="quick"]',`The number in the corner is the cost. Quick Shot costs 1 ammo. <b>Tap Quick Shot.</b>`,{act:()=>D.sel==='quick'}),
-  T('.dfoot .btn.fire',`Now tap <b>Draw!</b> to play it.`,{act:()=>D.busy}),
+const STELLS={gun:['shoot','Pete reaches for his gun…'],hide:['defend','Pete ducks behind a barrel…'],rope:['trick','Pete is swinging his lasso…'],reload:['extra','Pete is out of bullets!']};
+const SRULES=[['defend','Defend','shoot','Shoot'],['trick','Trick','defend','Defend'],['shoot','Shoot','trick','Trick']];
+function storyTable(){
+  const t=D.tell&&STELLS[D.tell];
+  return `<div class="stable">
+    <div class="srules">${SRULES.slice(0,D.rules||0).map((r,i)=>`<div class="srule ${i===D.rules-1&&D.newRule?'new':''}">${chip(r[0],r[1])} <span>beats</span> ${chip(r[2],r[3])}</div>`).join('')}</div></div>`;
+}
+function startStoryDuel(){
+  closeLayer();clearMM();CH=null;
+  const lv={};['quick','rifle','dodge','cover','lasso','sarsa','sand'].forEach(id=>lv[id]=1);
+  D={turn:1,sel:null,busy:false,lines:[],reveal:null,over:null,cd:null,slam:false,tier:0,arena:0,map:0,hist:[],
+    qd:[],tut:true,story:true,noTimer:true,script:['quick','cover','lasso',null],hide:new Set(['rifle','sarsa']),rules:0,tell:null,
+    me:makeSide(true,'You',S.char||'dusty',['quick','dodge','lasso','rifle','cover','sarsa'],lv),
+    op:makeSide(false,'Old Pete','pete',['quick','rifle','cover','sand','lasso','sarsa'],lv)};
+  D.op.max=D.op.hp=17;
+  try{preloadDuelAudio()}catch(e){}
+  sfx('bell');drawDuel();startTurnTimer();
+}
+/* a step where the player has to work out the right card */
+function storyPick(v){
+  const st=TUT&&TUT.steps[TUT.i];if(!st||!st.pick||!D||!D.story)return false;
+  const p=document.querySelector('#tut .tut-tx p'),sm=document.querySelector('#tut .tut-tx small');
+  const ok=st.pick===v||st.pick===CARDS[v].cat;
+  if(!ok){D.sel=null;drawDuel();sfx('early');vibe(30);
+    const c=document.querySelector(`.hcard[data-v="${v}"]`);if(c){c.classList.remove('nope');void c.offsetWidth;c.classList.add('nope')}
+    if(p)p.innerHTML=typeof st.hint==='object'?(st.hint[CARDS[v].cat]||Object.values(st.hint)[0]):st.hint;if(sm)sm.textContent='Try another card';return true}
+  D.sel=v;drawDuel();sfx('card');vibe(6);if(p)p.innerHTML=st.good;if(sm)sm.textContent='Tap Draw!';
+  const f=document.querySelector('.dfoot .btn.fire');if(f)f.classList.add('tutglow');
+  return true;
+}
+const SP=(tell,ask,pickId,hint,good)=>[
+  {before:()=>{D.tell=tell;D.newRule=false;drawDuel()},wait:()=>D&&!D.busy},
+  T('.dfoot',ask,{pick:pickId,hint,good,act:()=>D.busy}),
+];
+function storySteps(full){return [
+  {before:startStoryDuel,wait:()=>D&&D.story},
+  T(null,`Howdy${S.name?', '+esc(S.name):', stranger'}! I'm Rosa. That old buzzard is <b>Old Pete</b>. Let's teach him some manners.`),
+  T('.opbar',`Knock his health down to <b>zero</b> and you win.`),
+  T('.hand',`Each turn you both pick a card <b>in secret</b>. Then both cards flip at the same time. Watch Pete closely!`),
+  ...SP('gun',`Pete's reaching for his gun!<br><b>Which card stops a bullet?</b>`,'defend',{shoot:`If you both shoot, you <b>both</b> get hurt! Try a card that <b>blocks</b>.`,trick:`A rope is too slow to stop a bullet. Try a card that <b>blocks</b>.`},`You got it! Now tap <b>Draw!</b>`),
   tw(()=>D.applied===1),
-  T('.duo',`He played Lasso, a ${chip('trick','Trick')} card. ${chip('shoot','Shoot')} beats ${chip('trick','Trick')}, so his trick failed and you hit him for 3!`),
+  T('.srules',`Missed you by a mile! You read him like a book.`,{before:()=>{D.rules=1;D.newRule=true;sfx('bling');drawDuel()}}),
   tw(()=>D.turn===2&&!D.busy),
-  T('.hcard[data-v="quick"]',`Played cards go grey. When all 6 are used, you <b>reload</b> and get them all back.`),
-  T('.opbar .ammo',`He only has 2 ammo, so his Heavy Rifle (3) is too expensive. He'll probably shoot something small.`),
-  T('.hcard[data-v="dodge"]',`${chip('defend','Defend')} beats ${chip('shoot','Shoot')}. <b>Tap Dodge Roll.</b>`,{act:()=>D.sel==='dodge'}),
-  T('.dfoot .btn.fire',`Tap <b>Draw!</b>`,{act:()=>D.busy}),
+  ...SP('hide',`Now he's hiding behind a barrel. Bullets won't get him there...<br><b>What would pull him out?</b>`,'trick',{shoot:`Your bullet would just hit the barrel! Try something <b>sneaky</b>...`,defend:`He's hiding, not shooting. Nothing to block! Try something <b>sneaky</b>...`},`Yee-haw! Tap <b>Draw!</b>`),
   tw(()=>D.applied===2),
-  T('.duo',`Blocked! His Quick Shot did nothing.`),
+  T('.srules',`Yanked him right out!`,{before:()=>{D.rules=2;D.newRule=true;sfx('bling');drawDuel()}}),
   tw(()=>D.turn===3&&!D.busy),
-  T('.mebar .ammo',`You've saved up 4 ammo. Time for the big gun: Heavy Rifle costs 3 and hits for 7.`),
-  T('.hcard[data-v="rifle"]',`<b>Tap Heavy Rifle.</b>`,{act:()=>D.sel==='rifle'}),
-  T('.dfoot .btn.fire',`Tap <b>Draw!</b>`,{act:()=>D.busy}),
+  ...SP('rope',`He's swinging his lasso at you!<br><b>What's faster than a rope?</b>`,'shoot',{defend:`A rope goes right around a block! What's the <b>fastest</b> thing in the West?`,trick:`Two ropes just get tangled! What's the <b>fastest</b> thing in the West?`},`Quick thinking! Tap <b>Draw!</b>`),
   tw(()=>D.applied===3),
-  T('.duo',`He drank Sarsaparilla to heal, but it makes him take +2 if you shoot. Big hit!`),
+  T('.srules',`Bang! Now you know the secret: <b>every card beats one kind and loses to another.</b>`,{before:()=>{D.rules=3;D.newRule=true;sfx('bling');drawDuel()}}),
   tw(()=>D.turn===4&&!D.busy),
-  T('.dfoot .hold',`Short on ammo? <b>Hold fire</b> plays nothing this turn and gives you +1 extra ammo.`),
-  T('.opbar .pips',`Keep an eye on his cards. Once he's used one, you know he can't play it again until he reloads.`),
-  T(null,`Sometimes a <b>Quick Draw</b> pops up. Wait for <b>DRAW!</b>, then tap as fast as you can. Tap too early and you lose it.`),
-  T('#timer',`In real duels you have <b>12 seconds</b> to pick each turn. Now finish Old Pete off yourself. Good luck!`,{before:()=>{D.noTimer=false;startTurnTimer()}}),
+  T('.hcard[data-v="rifle"]',`Pete's out of bullets! Time for the big iron: the <b>Heavy Rifle</b>.`,{before:()=>{D.hide.delete('rifle');D.tell='reload';D.newRule=false;D.op.hp=Math.min(D.op.hp,7);drawDuel();sfx('cock')}}),
+  T('.mebar .ammo',()=>`Big guns cost <b>ammo</b>. The rifle needs 3 bullets and you've saved up ${D.me.pow}.`,{before:()=>{D.storyAmmo=true;drawDuel()}}),
+  T('.dfoot',`<b>Finish him!</b>`,{pick:'rifle',hint:`Use the <b>Heavy Rifle</b>!`,good:`Tap <b>Draw!</b>`,act:()=>D.busy}),
+  {free:true,wait:()=>!D||(D.over&&document.querySelector('.result'))},
+  ...(full?[
+    T('[data-a="tutDuelDone"]',`What a shot! Winners get a <b>strongbox</b>. Let's crack it open!`,{act:()=>!D,skipIf:()=>!D}),
+    T('.tchest',`<b>Tap the strongbox</b> to break it open!`,{act:()=>CH&&CH.opened,skipIf:()=>!CH}),
+    {free:true,wait:()=>!CH},
+    {before:()=>{if(!S.name)nameScreen(true)},free:true,wait:()=>S.name&&!document.querySelector('.namepick')},
+    T('.arena-head',()=>`Welcome to <b>Dusty Gulch</b>, ${esc(pname())}! Your first town.`,{before:()=>{S.seenRules=true;save();UI.tab='home';UI.drawer=false;closeLayer();render()}}),
+    T('.rankrow',`Every win earns <b>trophies</b>. They take you down the Trophy Road to new cards, new gunslingers and new towns. Who knows what's at the end...`),
+    T('.duelbtn',`Real outlaws are waiting. <b>Tap Duel!</b>`,{act:()=>!!MM||!!D}),
+  ]:[
+    T('[data-a="tutDuelDone"]',`Nice shooting, partner! Tap <b>Continue</b>.`,{act:()=>!D,skipIf:()=>!D}),
+  ]),
 ]}
-function fullSteps(){return [
-  ...duelSteps(),
-  {free:true,wait:()=>!D||D.over},
-  T('.result h1',`Practice duels don't count. In real duels you win <b>trophies</b>, gold and a <b>strongbox</b>.`,{skipIf:()=>!D}),
-  T('[data-a="tutDuelDone"]',`Tap <b>Continue</b>.`,{act:()=>!D,skipIf:()=>!D}),
-  T('.rankrow',`Trophies raise your <b>rank</b>. A new rank opens a new arena, new cards and tougher outlaws. Lose a duel and you lose trophies.`,{before:()=>{UI.tab='home';render()}}),
-  T('.rankbadge',`Tap your badge any time to see every rank.`),
-  T('.slots',`Strongboxes you win land here. You already have one. Let's open it!`,{before:()=>{if(!S.slots.some(Boolean)){S.slots[0]={t:'silver'};save()}UI.drawer=true;render()}}),
-  T('.slot.full',`<b>Tap the strongbox.</b>`,{act:()=>!!CH}),
-  T('.tchest',`<b>Tap it again</b> to break it open.`,{act:()=>CH&&CH.opened}),
-  {free:true,wait:()=>!CH},
-  T('.tab[data-v="deck"]',`Now let's look at your cards. <b>Tap Deck.</b>`,{act:()=>UI.tab==='deck'}),
-  T('.deckgrid',`This is your <b>deck</b>: the 6 cards you bring to every duel. It needs at least 1 ${chip('shoot','Shoot')}, 1 ${chip('defend','Defend')} and 1 ${chip('trick','Trick')}.`),
-  T('.deckgrid',`Hold and drag cards between your deck and your collection to swap them.`),
-  T('.deckgrid .dslot',`The <b>border</b> shows how rare a card is: <b style="color:var(--r-common)">Common</b>, <b style="color:var(--r-rare)">Rare</b>, <b style="color:var(--r-epic)">Epic</b> or <b style="color:var(--r-legend)">Legendary</b>. The picture's background shows its type.`),
-  T('.deckgrid .dslot',`<b>Tap this card</b> to see what it does.`,{act:()=>!!document.querySelector('.sheet .bigkc')}),
-  T('.sheet .kv',`Every strongbox gives you <b>copies</b> of cards. Collect enough copies to <b>upgrade</b> a card. A higher level means bigger numbers.`),
-  T('.sheet [data-a="upgrade"]',`When you have the copies and the gold, tap here to upgrade.`,{after:()=>closeLayer()}),
-  T('.lockgrid',`These cards are still <b>locked</b>. Find them in strongboxes. Some only show up once you reach a higher rank.`),
-  T('.tab[data-v="posse"]',`In <b>Posse</b> you pick who you duel as. Every gunslinger has their own perk.`),
-  T('.tab[data-v="shop"]',`In <b>Chests</b> you get a free strongbox every hour, and can buy better ones with gold.`),
-  T('.gearbtn',`Music, sound and this duel tutorial live in <b>Settings</b>. Now go win some duels, partner!`,{after:()=>{UI.tab='home';closeLayer();render()}}),
-]}
-function startTutorial(full){
+/* short one-time tips the first time a player sees something */
+function tip(key,steps,delay=350){
+  if(!S.tips)S.tips={};if(S.tips[key]||TUT)return;
+  setTimeout(()=>{if(TUT||S.tips[key])return;S.tips[key]=1;save();startTutorial('tip',steps)},delay);
+}
+function tipsFor(where){
+  if(!S||!S.onboarded)return;
+  if(where==='duel'&&D&&!D.tut&&!D.spec&&!D.online&&D.turn===1)tip('duel',[
+    T('.opbar .pips',`These are your rival's cards. You only see their <b>colour</b>, Remember which ones they've used up!`),
+    T('.mebar .ammo',`Cards cost <b>ammo</b>. You get +${AMMO_TURN} every turn. Short? Tap <b>Hold</b> to save up.`),
+    T('#timer',`Real duels have a clock: <b>12 seconds</b> to pick. Good luck!`)],500);
+  if(where==='deck')tip('deck',[T('.deckgrid',`Your <b>deck</b>: the 6 cards you bring to every duel. Hold and drag a card to swap it.`)]);
+  if(where==='posse')tip('posse',[T('#screen',`Your <b>posse</b>. Pick who you duel as. Every gunslinger has their own special perk.`)]);
+  if(where==='shop')tip('shop',[T('#screen',`The <b>chest shop</b>. A free strongbox every hour, and better ones for gold.`)]);
+}
+function startTutorial(full,tipSteps){
   tutEnd(false);
-  TUT={steps:full?fullSteps():duelSteps(),i:-1,full,shown:0};
+  const isTip=full==='tip';
+  TUT={steps:isTip?tipSteps:storySteps(!!full),i:-1,full:full===true,tip:isTip,shown:0};
   const el=document.createElement('div');el.id='tut';el.className='tut';
   el.innerHTML=`<div class="tut-hole"></div><div class="tut-bl"></div><div class="tut-bl"></div><div class="tut-bl"></div><div class="tut-bl"></div><div class="tut-bub" role="dialog" aria-live="polite"></div>`;
   document.getElementById('app').appendChild(el);
   el.addEventListener('click',e=>{
-    if(e.target.closest('[data-tut="skip"]')){tutSkip();return}
+    if(e.target.closest('[data-tut="skip"]')){if(!TUT||!TUT.full)tutSkip();return}
     const st=TUT&&TUT.steps[TUT.i];if(!st||st.wait||st.act)return;
     if(performance.now()-TUT.shown<350)return;
     sfx('tap');tutNext();
@@ -3853,7 +4151,8 @@ function tutNext(){
   TUT.shown=performance.now();TUT.scrolled=false;
   const el=document.getElementById('tut'),b=el.querySelector('.tut-bub');
   el.className='tut'+(st.wait?(st.free?' free':' waiting'):'')+(st.act?' act':'')+(st.sel?'':' nosel');
-  b.innerHTML=st.text?`<span class="tut-ava">${bust(COACH,46)}</span><div class="tut-tx"><p>${st.text}</p><small>${st.act?'Tap the glowing spot':'Tap anywhere to go on'}</small></div><button class="tut-skip" data-tut="skip">Skip</button>`:'';
+  const tx=typeof st.text==='function'?st.text():st.text;
+  b.innerHTML=tx?`<span class="tut-ava">${bust(COACH,46)}</span><div class="tut-tx"><p>${tx}</p><small>${st.pick?'Tap a card':st.act?'Tap the glowing spot':'Tap anywhere to go on'}</small></div>${TUT.full||TUT.tip?'':'<button class="tut-skip" data-tut="skip">Skip</button>'}`:'';
   b.classList.remove('in');void b.offsetWidth;b.classList.add('in');
 }
 function tutLoop(){
@@ -3905,7 +4204,7 @@ function tutEnd(done){
 /* ---------- boot ---------- */
 function splash(){setTimeout(()=>{ac();music()},60);layer().innerHTML=`<button class="splash splash2" data-a="startGame" aria-label="Sixgun. Tap to start">
   <span class="sp-art" aria-hidden="true"><i class="sp-glint"></i></span>
-  <span class="go">Tap anywhere</span></button>`}
+  <span class="go">Tap anywhere</span>${S&&!S.name&&!S.onboarded?'<span class="sp-login" data-a="splashLogin" role="button">Already playing? <b>Log in</b></span>':''}</button>`}
 /* floating dust in the sunlight on the start screen */
 function dustLoop(){
   const cv=document.querySelector('.sp-dust');if(!cv)return;const ctx=cv.getContext('2d');let W=0,H=0,dpr=1;
