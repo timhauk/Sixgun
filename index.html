@@ -1602,6 +1602,20 @@ div.rankrow .rd-next{margin-top:7px}
 /* Royal Strongbox: gold box in royal purple until its own picture arrives */
 .ch-royal.cimg > i{filter:hue-rotate(245deg) saturate(1.35) brightness(1.02)}
 .ch-royal.cimg{filter:drop-shadow(0 0 14px rgba(200,90,255,.6))}
+
+.banned .np-in{text-align:center;align-items:center}
+.banicon{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:rgba(180,40,30,.25);border:2px solid rgba(255,120,100,.6);color:#ffb3a3;margin:0 auto 6px}
+.banwhy{padding:8px 12px;border-radius:5px;background:rgba(0,0,0,.35);border:1px solid rgba(255,120,100,.4);color:#ffd2c8!important}
+.aplist{display:flex;flex-direction:column;gap:6px;max-height:52vh;overflow-y:auto}
+.aprow{display:grid;grid-template-columns:36px minmax(0,1fr) auto;align-items:center;gap:8px;padding:6px 8px;border-radius:5px;background:rgba(0,0,0,.25)}
+.aprow.isban{box-shadow:inset 0 0 0 1px rgba(255,120,100,.45);background:rgba(120,30,20,.18)}
+.apn{min-width:0}.apn b{display:block;font-size:14px;color:#fff2d6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.apn b small{color:rgba(255,236,210,.5);font-weight:400}
+.apn > small{display:block;font-size:11px;color:rgba(255,236,210,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.apb{display:flex;gap:5px}.apb .btn{padding-inline:9px;min-height:34px}
+.apdel{color:#ff9a86!important}
+.banchip{font-style:normal;font-weight:800;color:#ffb3a3;text-transform:uppercase;font-size:10px;letter-spacing:.08em}
+#apq,.apwhy{height:44px;border-radius:4px;border:1px solid rgba(255,220,170,.25);background:rgba(10,6,3,.78);color:#fff2d6;font:inherit;font-size:15px;padding:0 12px;width:100%;box-sizing:border-box}
+.btn.danger{background:linear-gradient(180deg,#b8432f,#7c2416)!important;color:#fff!important}
 </style>
 
 </head>
@@ -2261,9 +2275,30 @@ async function savePw(){
 }
 /* is this phone still the logged-in one? */
 async function netWho(){
-  if(!NET.ok||!S.acct)return true;
-  try{const {data}=await NET.sb.rpc('sg_whoami');if(data&&!data.account&&!data.profile){kicked();return false}}catch(e){}
+  if(!NET.ok)return true;
+  try{const {data}=await NET.sb.rpc('sg_whoami');
+    if(data&&data.wiped){wipedOut();return false}
+    if(data&&data.isbanned){NET.banned=data.banned||'';banScreen();return false}
+    if(NET.banned!=null&&data){NET.banned=null;closeLayer();render()}
+    if(S.acct&&data&&!data.account&&!data.profile){kicked();return false}}catch(e){}
   return true;
+}
+function banScreen(){
+  if(D){clearInterval(window.__turnTmr);if(D.online)leaveOnline(D.online,true);D=null}
+  CH=null;MM&&clearMM();if(TUT)tutEnd(false);
+  layer().innerHTML=`<div class="ranks namepick banned" role="alertdialog" aria-modal="true" aria-label="Banned"><div class="np-in gutter">
+    <div class="banicon">${icon('lock',44,2.2)}</div><h2>You've been banned</h2>
+    <p>An admin has banned ${S.name?`<b>${esc(S.name)}#${esc(S.tag||'')}</b>`:'this player'} from Sixgun Showdown.</p>
+    ${NET.banned?`<p class="banwhy">Reason: ${esc(NET.banned)}</p>`:''}
+    <p class="muted" style="font-size:13px">If you think this is a mistake, contact the game's owner.</p></div></div>`;
+}
+async function wipedOut(){
+  try{await NET.sb.rpc('sg_wiped_ok')}catch(e){}
+  if(D){clearInterval(window.__turnTmr);D=null}CH=null;if(TUT)tutEnd(false);
+  S=fresh();upgradeState();save();NET.synced=false;NET.banned=null;closeLayer();render();
+  sheet(`<div style="text-align:center;display:flex;flex-direction:column;gap:10px"><h2 style="margin:0">Your player was deleted</h2>
+    <p class="muted" style="margin:0">An admin removed your old player. You can start fresh with a new gunslinger.</p>
+    <button class="btn wide" data-a="restart">Start again</button></div>`);
 }
 function kicked(){
   const nm=S.acct;S=fresh();save();NET.synced=false;closeLayer();render();
@@ -2589,7 +2624,7 @@ async function netClaim(name,tag){
 }
 async function netSyncProfile(){
   if(!NET.ok||!S.name)return;
-  if(S.acct&&!await netWho())return;
+  if(!await netWho())return;
   for(let i=0;i<5;i++){
     const err=await netClaim(S.name,S.tag);
     if(!err)return;
@@ -2597,7 +2632,7 @@ async function netSyncProfile(){
   }
   toast(`Your tag is now #${S.tag}`);render();
 }
-async function netBeat(){if(!NET.ok||!S.name)return;if(S.acct&&!await netWho())return;maybeAskPw();tClaim();if(!NET.synced)return netSyncProfile();await NET.sb.from('profiles').update({char:S.char,trophies:S.trophies,lvl:S.lvl||1,last_seen:new Date().toISOString()}).eq('id',NET.me)}
+async function netBeat(){if(!NET.ok||!S.name)return;if(!await netWho())return;maybeAskPw();tClaim();if(!NET.synced)return netSyncProfile();await NET.sb.from('profiles').update({char:S.char,trophies:S.trophies,lvl:S.lvl||1,last_seen:new Date().toISOString()}).eq('id',NET.me)}
 async function netPoll(){
   if(!NET.ok||!S.name||document.hidden)return;
   try{
@@ -3678,7 +3713,7 @@ const A={
   freeChest:()=>{if(S.freeAt>Date.now())return;S.freeAt=Date.now()+FREE_MS;save();openChest('wood')},
   chestTap:()=>chestTap(),
   ranks:()=>ranksScreen(),
-  startGame:()=>{const sp=document.querySelector('.splash2');if(sp&&!sp.classList.contains('leaving')){sp.classList.add('leaving');ac();music();setTimeout(A.startGame,420);return}closeLayer();ac();music();if(!S.onboarded){setTimeout(()=>startTutorial(true),250);return}if(!S.name){nameScreen(true);return}if(false)setTimeout(()=>startTutorial(true),400)},
+  startGame:()=>{const sp=document.querySelector('.splash2');if(sp&&!sp.classList.contains('leaving')){sp.classList.add('leaving');ac();music();setTimeout(A.startGame,420);return}closeLayer();ac();music();if(NET.banned!=null){banScreen();return}if(!S.onboarded){setTimeout(()=>startTutorial(true),250);return}if(!S.name){nameScreen(true);return}if(false)setTimeout(()=>startTutorial(true),400)},
   chestDone:()=>{CH=null;closeLayer();render()},
   boxNav:v=>{const n=boxList().length,d=+v,i=(UI.bi||0)+d;if(i<0||i>=n)return;UI.bi=i;UI.slide=d>0?'in-r':'in-l';sfx('tap');render()},
   hold:()=>{if(!D||D.busy||D.over||D.lockedIn)return;D.sel='hold';sfx('dry');if(D.pvp)lockIn();else fire()},
@@ -3711,7 +3746,11 @@ const A={
   showPw:v=>{const i=document.getElementById(v);if(!i)return;const s=i.type==='password';i.type=s?'text':'password';const b=document.querySelector(`[data-a="showPw"][data-v="${v}"]`);if(b)b.textContent=s?'Hide':'Show'},
   loginScreen:()=>loginScreen(),
   tJoin:v=>tJoin(v),tPlay:v=>tPlay(v),tCancelSeek:()=>tCancelSeek(),tReload:()=>{TR.loaded=false;render()},
-  tAdmin:()=>tAdminSheet(),tCreate:()=>tCreate(),tEndNow:v=>tAdminAsk('end',v),tCancelT:v=>tAdminAsk('cancel',v),
+  tAdmin:()=>tAdminSheet(),
+  restart:()=>{closeLayer();splash()},
+  aPlayers:()=>adminPlayers(),aFind:()=>adminFind(),
+  aBan:v=>adminAsk('ban',v),aUnban:v=>adminAsk('unban',v),aDel:v=>adminAsk('del',v),
+  aDo:v=>{const [f,id]=v.split(':');adminDo(f,id)},tCreate:()=>tCreate(),tEndNow:v=>tAdminAsk('end',v),tCancelT:v=>tAdminAsk('cancel',v),
   tAdminDo:v=>{const [f,id]=v.split(':');tAdminAct(f,id)},
   tOpenPrize:v=>{const L=v.split(',').filter(k=>CHESTS[k]);const first=L.shift();L.forEach(k=>{const i=S.slots.findIndex(s=>!s);if(i>=0)S.slots[i]={t:k};else S.gold+=300});save();closeLayer();if(first)openChest(first)},
   tBack:()=>{clearInterval(window.__turnTmr);if(D&&D.online)leaveOnline(D.online);D=null;closeLayer();UI.tab='cup';render();tRefresh()},
@@ -3779,7 +3818,7 @@ document.addEventListener('click',e=>{
 });
 let SW=null;
 ['pointerdown','touchend'].forEach(ev=>document.addEventListener(ev,()=>{const c=ac();if(!c)return;if(!window.__unl){window.__unl=1;try{const b=c.createBuffer(1,1,22050),s=c.createBufferSource();s.buffer=b;s.connect(c.destination);s.start(0)}catch(e){}}music()},{capture:true,passive:true}));
-const NOCLICK=new Set(['tPlay','tJoin','splashLogin','pick','hold','fire','startGame','chestTap','openSlot','freeChest','buyChest','chestDone','claimRoad','claimBounty','claimChar','duel','startDuel','findMatch','rematch','boxNav','sayEmote','upgrade','tutDuelDone']);
+const NOCLICK=new Set(['restart','tPlay','tJoin','splashLogin','pick','hold','fire','startGame','chestTap','openSlot','freeChest','buyChest','chestDone','claimRoad','claimBounty','claimChar','duel','startDuel','findMatch','rematch','boxNav','sayEmote','upgrade','tutDuelDone']);
 document.addEventListener('pointerdown',e=>{if(UI.tab==='shop'&&!CH&&e.target.closest('.booth')&&!e.target.closest('button'))SW={x:e.clientX,y:e.clientY}});
 document.addEventListener('pointerup',e=>{if(!SW)return;const dx=e.clientX-SW.x,dy=e.clientY-SW.y;SW=null;if(Math.abs(dx)>50&&Math.abs(dy)<70)A.boxNav(dx<0?1:-1)});
 document.addEventListener('keydown',e=>{if(UI.tab==='shop'&&!CH&&!layer().innerHTML&&(e.key==='ArrowLeft'||e.key==='ArrowRight'))A.boxNav(e.key==='ArrowRight'?1:-1)});
@@ -3880,7 +3919,7 @@ function cupScreen(){
   if(!TR.loaded){tRefresh();return `<div class="tempty">${CYL}<p>Loading tournaments…</p></div>`}
   if(!NET.ok)return `<div class="tempty"><h2>Tournaments</h2><p>Tournaments need the internet. Check your connection and try again.</p><button class="btn" data-a="tReload">Try again</button></div>`;
   if(!S.name)return `<div class="tempty"><h2>Tournaments</h2><p>Pick a name first.</p></div>`;
-  const admin=NET.admin?`<button class="btn ghost wide" data-a="tAdmin">${icon('star',16,2.4)} Admin: tournaments</button>`:'';
+  const admin=NET.admin?`<div class="row2"><button class="btn ghost" data-a="tAdmin">${icon('star',16,2.4)} Tournaments</button><button class="btn ghost" data-a="aPlayers">${icon('lock',16,2.4)} Players</button></div>`:'';
   const cards=TR.list.map(t=>{
     const L=TR.entries[t.id]||[], e=myEntry(t), pot=tPot(t), started=tNow()>=tMs(t.starts_at), left=tMs(t.ends_at)-tNow();
     const full=t.max_players&&L.length>=t.max_players, outOf=t.max_duels&&e&&e.duels>=t.max_duels;
@@ -4007,6 +4046,49 @@ function tAdminAsk(fn,tid){const t=TR.list.find(x=>x.id===tid);if(!t)return;
     <div class="row2"><button class="btn ghost" data-a="tAdmin">Back</button><button class="btn" data-a="tAdminDo" data-v="${fn}:${tid}">${fn==='end'?'End it now':'Cancel it'}</button></div>`)}
 async function tAdminAct(fn,tid){const {data}=fn==='end'?await NET.sb.rpc('sg_t_finish',{p_tid:tid,p_force:true}):await NET.sb.rpc('sg_t_cancel',{p_tid:tid});
   toast(fn==='end'?'Tournament ended':'Tournament cancelled, fees paid back');await tLoad();closeLayer();render();tClaim()}
+
+
+/* ---------- admin: players ---------- */
+const AP={q:'',rows:[]};
+function adminPlayers(){
+  sheet(`<h2 style="text-align:center;margin:0">Admin: players</h2>
+    <div class="np-pw"><input id="apq" placeholder="Search name or name#tag" value="${esc(AP.q)}" autocomplete="off" spellcheck="false"><button class="btn sm" data-a="aFind">Search</button></div>
+    <div class="aplist" id="aplist">${AP.rows.length?apRows():'<p class="muted" style="margin:0;text-align:center">Search for a player. Leave it empty to see the latest ones.</p>'}</div>
+    <button class="btn ghost wide" data-a="close">Close</button>`);
+  const i=document.getElementById('apq');if(i)i.addEventListener('keydown',e=>{if(e.key==='Enter')adminFind()});
+  if(!AP.rows.length)adminFind();
+}
+function apRows(){
+  return AP.rows.map(p=>`<div class="aprow ${p.banned?'isban':''}">
+    <span class="tava">${bust(CHARS[p.char]?p.char:'dusty',34)}</span>
+    <span class="apn"><b>${esc(p.name)}<small>#${esc(p.tag)}</small></b><small>${p.banned?`<i class="banchip">Banned</i>${p.ban_reason?' '+esc(p.ban_reason):''}`:`${p.trophies||0} trophies · ${p.account?'has password':'guest'}${p.last_seen?' · seen '+agoTxt(p.last_seen):''}`}</small></span>
+    ${p.id===NET.me?'<small class="muted">You</small>':`<span class="apb">${p.banned?`<button class="btn ghost sm" data-a="aUnban" data-v="${p.id}">Unban</button>`:`<button class="btn ghost sm" data-a="aBan" data-v="${p.id}">Ban</button>`}<button class="btn ghost sm apdel" data-a="aDel" data-v="${p.id}">Delete</button></span>`}
+  </div>`).join('')||'<p class="muted" style="margin:0;text-align:center">No players found.</p>';
+}
+function agoTxt(s){const m=Math.floor((Date.now()-new Date(s).getTime())/6e4);return m<2?'just now':m<60?m+'m ago':m<1440?Math.floor(m/60)+'h ago':Math.floor(m/1440)+'d ago'}
+async function adminFind(){
+  const i=document.getElementById('apq');AP.q=i?i.value.trim():AP.q;
+  const L=document.getElementById('aplist');if(L)L.innerHTML='<p class="muted" style="margin:0;text-align:center">Searching…</p>';
+  try{const {data}=await NET.sb.rpc('sg_admin_find',{p_q:AP.q});AP.rows=Array.isArray(data)?data:[]}catch(e){AP.rows=[]}
+  const L2=document.getElementById('aplist');if(L2)L2.innerHTML=apRows();
+}
+function adminAsk(f,id){
+  const p=AP.rows.find(x=>x.id===id);if(!p)return;const who=`<b style="color:var(--fg)">${esc(p.name)}#${esc(p.tag)}</b>`;
+  sheet(`<h2 style="text-align:center;margin:0">${f==='ban'?'Ban':f==='unban'?'Unban':'Delete'} ${esc(p.name)}?</h2>
+    <p class="muted" style="text-align:center;margin:0">${f==='ban'?`${who} won't be able to play. They're also removed from any tournament that's running. You can unban them later.`:f==='unban'?`${who} can play again.`:`This deletes ${who} for good: their player, password, friends and tournament spots. Their phone starts over as a new player. <b style="color:#ff9a86">This can't be undone.</b>`}</p>
+    ${f==='ban'?'<input id="apwhy" class="apwhy" maxlength="80" placeholder="Reason (optional, they will see it)">':''}
+    <div class="np-err" id="aperr"></div>
+    <div class="row2"><button class="btn ghost" data-a="aPlayers">Back</button><button class="btn ${f==='del'?'danger':''}" data-a="aDo" data-v="${f}:${id}">${f==='ban'?'Ban':f==='unban'?'Unban':'Delete for good'}</button></div>`);
+}
+async function adminDo(f,id){
+  const why=(document.getElementById('apwhy')||{}).value||'';
+  const fn=f==='ban'?'sg_admin_ban':f==='unban'?'sg_admin_unban':'sg_admin_delete';
+  const args=f==='ban'?{p_uid:id,p_reason:why}:{p_uid:id};
+  const {data,error}=await NET.sb.rpc(fn,args);
+  if(error||data){const e=document.getElementById('aperr');if(e)e.textContent=data||'Something went wrong.';sfx('early');return}
+  sfx('coin');toast(f==='ban'?'Player banned':f==='unban'?'Player unbanned':'Player deleted');
+  AP.rows=[];adminPlayers();tLoad();
+}
 
 /* ---------- settings ---------- */
 function settingsSheet(){
